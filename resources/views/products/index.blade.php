@@ -43,19 +43,26 @@
       <td><a href="" class="btn btn-outline-warning text-dark"><i class="fa fa-plus"></i></a></td>
       <td> <a href="{{route('products.edit',['product'=>$product->id])}}" class="btn btn-block btn-dark text-warning ">Edit &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-pencil" style="color:white;"></i></a> </td>
       <td> 
+<<<<<<< HEAD
       <form action="{{url('products/'.$product->id)}}" method="POST">
       @csrf
       <input name="_method" type="hidden" value="DELETE">
       <button type="submit" class="btn btn-block btn-dark text-warning" onclick="return confirm('Are you sure to delete?')" name="button">Delete &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash text-light"></i></button>
       </form>
+=======
+      <a href="#" onclick="myFunction()" type="button" class="btn btn-dark text-warning view"  >Delete &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash" style="color:white;"></i></a>
+>>>>>>> 2d7cd62f8635932e3689f9995f627fdc3282c5c5
       </td>
     </tr>
   </tbody>
   @endforeach
 </table>
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 2d7cd62f8635932e3689f9995f627fdc3282c5c5
 <div class="col-lg-12">
 <a href="{{route('products.create')}}" class="btn btn-dark btn-lg float-right mt-3 text-warning">  Add New Product &nbsp;&nbsp; <i class="fa fa-plus-circle" style="color:white"></i> </a>
 
@@ -65,9 +72,15 @@
 </div>
 
 @else
- <div class="jumbotron text-center">
- <h1 class="display-4">No Data Avaiable Now..!</h1>
-  <a class="btn btn-warning" href="{{route('products.create')}}" role="button">Learn more</a>
+ <div class="jumbotron container bg-warning text-center my-5">
+ <h1 class="display-4">No Product Data Avaiable Now..!</h1>
+  <a class="btn btn-dark my-5 text-warning" style="font-weight:bold " href="{{route('products.create')}}" role="button">Add New Product &nbsp;&nbsp; <i class="fa fa-plus-circle text-warning"></i></a>
  </div>
  @endif
+
+ <script>
+    function myfunction(){
+      confirm("Click Confirm to Delete");`
+    }
+ </script>
 @endsection
