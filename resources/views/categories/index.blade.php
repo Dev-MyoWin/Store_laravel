@@ -36,10 +36,9 @@
 </div>
 
 @else
- <div class="jumbotron text-center">
- <h1 class="display-4">No Data Avaiable Now..!</h1>
-  <a class="btn btn-info" href="{{route('categories.create')}}" role="button">Learn more</a>
+ <div class="jumbotron container bg-warning text-center my-5">
+ <h1 class="display-4">No Category Data Avaiable Now..!</h1>
+  <a class="btn btn-dark my-5 text-warning" style="font-weight:bold " href="{{route('categories.create')}}" role="button">Add New Category &nbsp;&nbsp; <i class="fa fa-plus-circle text-warning"></i></a>
  </div>
-  
 @endif
 @endsection

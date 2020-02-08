@@ -43,47 +43,12 @@
       <td><a href="" class="btn btn-outline-warning text-dark"><i class="fa fa-plus"></i></a></td>
       <td> <a href="{{route('products.edit',['product'=>$product->id])}}" class="btn btn-block btn-dark text-warning ">Edit &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-pencil" style="color:white;"></i></a> </td>
       <td> 
-      <a href="{{route('products.destroy',['product'])}}" type="button" class="btn btn-dark text-warning view"  >Delete &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash" style="color:white;"></i></a>
+      <a href="#" onclick="myFunction()" type="button" class="btn btn-dark text-warning view"  >Delete &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash" style="color:white;"></i></a>
       </td>
     </tr>
   </tbody>
   @endforeach
 </table>
-
-
-
-
-<!-- Modal -->
-<div class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header bg-warning">
-        <h5 class="modal-title " id="exampleModalCenterTitle"> <strong>Warning..!!!</strong> </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <h4>ARE YOU SURE TO DELETE THIS ITEM</h4>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-       
-        <form action="{{url('products/'.$product->id)}}" method="post">
-          @csrf
-          <input name="_method" type="hidden" value="DELETE">
-          <button type="submit" class="btn btn-warning text-light" name="button">Confirm</button>
-        </form>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
 
 <div class="col-lg-12">
 <a href="{{route('products.create')}}" class="btn btn-dark btn-lg float-right mt-3 text-warning">  Add New Product &nbsp;&nbsp; <i class="fa fa-plus-circle" style="color:white"></i> </a>
@@ -94,9 +59,15 @@
 </div>
 
 @else
- <div class="jumbotron text-center">
- <h1 class="display-4">No Data Avaiable Now..!</h1>
-  <a class="btn btn-warning" href="{{route('products.create')}}" role="button">Learn more</a>
+ <div class="jumbotron container bg-warning text-center my-5">
+ <h1 class="display-4">No Product Data Avaiable Now..!</h1>
+  <a class="btn btn-dark my-5 text-warning" style="font-weight:bold " href="{{route('products.create')}}" role="button">Add New Product &nbsp;&nbsp; <i class="fa fa-plus-circle text-warning"></i></a>
  </div>
  @endif
+
+ <script>
+    function myfunction(){
+      confirm("Click Confirm to Delete");`
+    }
+ </script>
 @endsection
