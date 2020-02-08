@@ -16,11 +16,10 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => ['auth']], function () {
-             Route::resource('products','ProductController');
+     //        
     
    });
-Route::resource('categories','CategoryController')->only(['index','create','store','edit','update']);
-
-Auth::routes();
+Route::resource('products','ProductController');
+Route::resource('categories','CategoryController');
 
 Route::get('/home', 'HomeController@index')->name('home');

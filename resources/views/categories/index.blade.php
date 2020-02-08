@@ -23,7 +23,13 @@
       <td class="pt-3"><?php echo $x;$x++?></td>
       <td class="pt-3">{{$category->name}}</td>
       <td> <a href="{{route('categories.edit',['category'=>$category->id])}}" class="btn btn-dark text-warning btn-block">Edit &nbsp;&nbsp;&nbsp;<i class="fa fa-pencil text-light"></i></a> </td>
-      <td> <a href="#" class="btn btn-dark text-warning btn-block">Delete &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash text-light"></i></a> </td>
+      <td>
+      <form action="{{url('categories/'.$category->id)}}" method="POST">
+      @csrf
+      <input name="_method" type="hidden" value="DELETE">
+      <button type="submit" class="btn btn-block btn-dark text-warning" onclick="return confirm('Are you sure to delete?')" name="button">Delete &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash text-light"></i></button>
+      </form>
+       </td>
     </tr>
   </tbody>
  
