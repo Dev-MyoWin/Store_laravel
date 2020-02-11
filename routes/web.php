@@ -12,16 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('welcome');
 });
 
 
 Route::resource('products','ProductController');
 Route::resource('categories','CategoryController');
 
-
-
 Auth::routes();
 
+Route::post('lock','ProductController@lock')->name('lock');
+Route::post('unlock','ProductController@unlock')->name('unlock');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'ProductController@index')->name('home');

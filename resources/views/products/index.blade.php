@@ -30,9 +30,14 @@
   <?php $x=1;?>
 @foreach ($products as $product)
   <tbody>
+  @if($product->lock_products == "false")
     <tr align="center">
       <th>
-        <a href="#" class="btn btn-outline-dark text-dark"><i class="fa fa-lock"></i></a>
+      <form action="{{route('lock',['id'=>$product->id])}}" method="POST">
+      @csrf
+      <input name="_method" type="hidden">
+      <button type="submit" class="btn btn-outline-dark text-dark"  name="button"><i class="fa fa-unlock-alt"></i></button>
+      </form>
       </th>
       <td class="pt-3"><?php echo $x;$x++?></td>
       <td class="pt-3">{{$product->name}}</td>
@@ -50,6 +55,30 @@
       </form>
       </td>
     </tr>
+
+    @else 
+
+    <tr align="center">
+      <th>
+      <form action="{{route('unlock',['id'=>$product->id])}}" method="POST">
+      @csrf
+      <input name="_method" type="hidden">
+      <button type="submit" class="btn btn-outline-dark text-dark"  name="button"><i class="fa fa-lock"></i></button>
+      </form>
+      </th>
+      <td class="pt-3"><?php echo $x;$x++?></td>
+      <td class="pt-3">{{$product->name}}</td>
+      <td class="pt-3">{{$product->category}}</td>
+      <td class="pt-3">{{\Carbon\Carbon::parse($product->created_at)->diffForHumans()}}</td>
+      <td><a href="" class="btn btn-outline-secondary text-dark"><i class="fa fa-minus"></i></a></td>
+      <td class="pt-3">{{$product->amount}}</td>
+      <td><a href="" class="btn btn-outline-secondary text-dark"><i class="fa fa-plus"></i></a></td>
+      <td> <a href="#" class="btn btn-block btn-secondary text-warning ">Edit &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-pencil" style="color:white;"></i></a> </td>
+      <td> 
+      <button type="submit" class="btn btn-block btn-secondary text-warning" name="button">Delete &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash text-light"></i></button>
+      </td>
+    </tr>
+    @endif
   </tbody>
   @endforeach
 </table>

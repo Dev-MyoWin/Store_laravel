@@ -27,6 +27,7 @@ class ProductController extends Controller
     {
         return view('products.create',['categories'=>Category::all()]);
     }
+   
 
     /**
      * Store a newly created resource in storage.
@@ -56,6 +57,24 @@ class ProductController extends Controller
     public function show($id)
     {
         //
+    }
+    public function lock(Request $request)
+    {
+        $id = $request->id;
+    
+        Product::where('id', '=', $id)->update(['lock_products'=>"true"]);
+        return redirect()->route('products.index');
+      
+        
+    }
+    public function unlock(Request $request)
+    {
+        $id = $request->id;
+    
+        Product::where('id', '=', $id)->update(['lock_products'=>"false"]);
+        return redirect()->route('products.index');
+      
+        
     }
 
     /**
