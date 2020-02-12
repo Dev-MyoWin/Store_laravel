@@ -32,21 +32,46 @@
   <tbody>
     <tr align="center">
       <th>
-        <a href="#" class="btn btn-outline-dark text-dark"><i class="fa fa-lock"></i></a>
+        <form action="{{route('lock',['id'=>$product->id])}}" method="POST">
+        @csrf
+          <input name="_method" type="hidden">
+          @if($product->lock_products == "true") 
+            <button type="submit" class="btn btn-outline-dark text-dark"><i class="fa fa-lock"></i></button>
+          @else
+            <button type="submit" class="btn btn-outline-dark text-dark"><i class="fa fa-unlock-alt"></i></button>
+          @endif
+        </form>
       </th>
       <td class="pt-3"><?php echo $x;$x++?></td>
       <td class="pt-3">{{$product->name}}</td>
       <td class="pt-3">{{$product->category}}</td>
       <td class="pt-3">{{\Carbon\Carbon::parse($product->created_at)->diffForHumans()}}</td>
-      <td><a href="" class="btn btn-outline-warning text-dark"><i class="fa fa-minus"></i></a></td>
+      @if($product->lock_products == "true") 
+        <td><a href="#" class="btn btn-outline-warning text-dark disabled"><i class="fa fa-minus"></i></a></td>
+      @else
+        <td><a href="" class="btn btn-outline-warning text-dark"><i class="fa fa-minus"></i></a></td>
+      @endif 
       <td class="pt-3">{{$product->amount}}</td>
-      <td><a href="" class="btn btn-outline-warning text-dark"><i class="fa fa-plus"></i></a></td>
-      <td> <a href="{{route('products.edit',['product'=>$product->id])}}" class="btn btn-block btn-dark text-warning ">Edit &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-pencil" style="color:white;"></i></a> </td>
+      @if($product->lock_products == "true") 
+        <td><a href="#" class="btn btn-outline-warning text-dark disabled"><i class="fa fa-plus"></i></a></td>
+      @else
+        <td><a href="" class="btn btn-outline-warning text-dark" disabled><i class="fa fa-plus"></i></a></td>
+      @endif 
+      <td>
+        @if($product->lock_products == "true") 
+          <a href="#" id="edit" class="btn btn-block btn-dark text-warning disabled">Edit &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-pencil" style="color:white;"></i></a> </td>
+        @else
+          <a href="{{route('products.edit',['product'=>$product->id])}}" id="edit" class="btn btn-block btn-dark text-warning ">Edit &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-pencil" style="color:white;"></i></a> </td>
+        @endif 
       <td> 
       <form action="{{url('products/'.$product->id)}}" method="POST">
       @csrf
-      <input name="_method" type="hidden" value="DELETE">
-      <button type="submit" class="btn btn-block btn-dark text-warning" onclick="return confirm('Are you sure to delete?')" name="button">Delete &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash text-light"></i></button>
+      <input name="_method" id="delete" type="hidden" value="DELETE">
+        @if($product->lock_products == "true") 
+          <a href="#" class="btn btn-block btn-dark text-warning disabled" name="button">Delete &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash text-light"></i></button>
+        @else
+          <button type="submit" class="btn btn-block btn-dark text-warning" onclick="return confirm('Are you sure to delete?')" name="button">Delete &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash text-light"></i></button>
+        @endif 
       </form>
       </td>
     </tr>
@@ -71,7 +96,9 @@
 
  <script>
     function myfunction(){
-      confirm("Click Confirm to Delete");`
+      confirm("Click Confirm to Delete");
     }
+
+    ('')
  </script>
 @endsection
