@@ -11,7 +11,7 @@
       @foreach ($errors->all() as $error)
       <p class="text-danger">{{$error}}</p>
       @endforeach
-  @endif 
+  @endif
 
  <br>
  <br>
@@ -24,10 +24,10 @@
 
     <div class="form-group">
     <label for="productName">Product Category</label>
-    <select name="category" class="form-control" id="ProductName">
+    <select name="category_id" class="form-control" id="ProductName">
     @foreach ($categories as $category)
-    <option value="{{$category->name}}">
-    {{$category->name}}
+    <option value="{{$category->id}}">
+    {{$category->id}}
     </option>
     @endforeach
     </select>
