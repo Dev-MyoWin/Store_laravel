@@ -29,9 +29,9 @@
         @csrf
           <input name="_method" type="hidden">
           @if($product->lock_products == "true")
-            <button type="submit" class="btn btn-outline-dark text-dark"><i class="fa fa-lock"></i></button>
+            <button type="submit" class="btn btn-outline-dark"><i class="fa fa-lock"></i></button>
           @else
-            <button type="submit" class="btn btn-outline-dark text-dark"><i class="fa fa-unlock-alt"></i></button>
+            <button type="submit" class="btn btn-outline-warning"><i class="fa fa-unlock-alt"></i></button>
           @endif
         </form>
       </th>
@@ -48,7 +48,7 @@
       @if($product->lock_products == "true")
         <td><a href="#" class="btn btn-outline-warning text-dark disabled"><i class="fa fa-plus"></i></a></td>
       @else
-        <td><a href="" class="btn btn-outline-warning text-dark disabled" ><i class="fa fa-plus"></i></a></td>
+        <td><a href="" class="btn btn-outline-warning text-dark" ><i class="fa fa-plus"></i></a></td>
       @endif
       <td>
         @if($product->lock_products == "true")
@@ -68,7 +68,7 @@
       </form>
       </td>
     </tr>
-  
+
   </tbody>
   @endforeach
 </table>
