@@ -23,4 +23,4 @@ Auth::routes();
 
 Route::post('lock','ProductController@lock')->name('lock');
 
-Route::get('/home', 'ProductController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
