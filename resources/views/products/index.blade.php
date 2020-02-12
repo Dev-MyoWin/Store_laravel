@@ -1,25 +1,18 @@
 @extends('layouts.master')
 @section('title','Products')
 @section('content')
-
 @if(count($products)!=0)
 <div class="container">
   <div class="row">
-
   <h1 class=" my-5"><i class="fa fa-th">&nbsp;&nbsp;&nbsp;</i>Products</h1>
-
-
     <table class="table shadow">
-
-
   <thead>
     <tr align="center" class="table-secondary">
       <th>Lock</th>
       <th>No.</th>
       <th>Name</th>
       <th>Category</th>
-      <th>Created Date</th>
-      
+      <th>Created Date</th>  
       <th></th>
       <th>Amount</th>
       <th></th>
@@ -75,18 +68,15 @@
       </form>
       </td>
     </tr>
+  
   </tbody>
   @endforeach
 </table>
-
 <div class="col-lg-12">
 <a href="{{route('products.create')}}" class="btn btn-dark btn-lg float-right mt-3 text-warning">  Add New Product &nbsp;&nbsp; <i class="fa fa-plus-circle" style="color:white"></i> </a>
-
 </div>
 </div>
-
 </div>
-
 @else
  <div class="jumbotron container bg-warning text-center my-5">
  <h1 class="display-4">No Product Data Avaiable Now..!</h1>
@@ -94,11 +84,4 @@
  </div>
  @endif
 
- <script>
-    function myfunction(){
-      confirm("Click Confirm to Delete");
-    }
-
-    ('')
- </script>
 @endsection
