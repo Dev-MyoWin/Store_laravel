@@ -22,6 +22,5 @@ Route::resource('categories','CategoryController');
 Auth::routes();
 
 Route::post('lock','ProductController@lock')->name('lock');
-Route::post('unlock','ProductController@unlock')->name('unlock');
 
 Route::get('/home', 'ProductController@index')->name('home');
