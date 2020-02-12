@@ -19,7 +19,7 @@
       <th>Name</th>
       <th>Category</th>
       <th>Created Date</th>
-      
+
       <th></th>
       <th>Amount</th>
       <th></th>
@@ -35,7 +35,11 @@
         <form action="{{route('lock',['id'=>$product->id])}}" method="POST">
         @csrf
           <input name="_method" type="hidden">
+<<<<<<< HEAD
           @if($product->lock_products == "true") 
+=======
+          @if($product->lock_products == "true")
+>>>>>>> refs/remotes/origin/master
             <button type="submit" class="btn btn-outline-dark text-dark"><i class="fa fa-lock"></i></button>
           @else
             <button type="submit" class="btn btn-outline-dark text-dark"><i class="fa fa-unlock-alt"></i></button>
@@ -46,6 +50,7 @@
       <td class="pt-3">{{$product->name}}</td>
       <td class="pt-3">{{$product->category}}</td>
       <td class="pt-3">{{\Carbon\Carbon::parse($product->created_at)->diffForHumans()}}</td>
+<<<<<<< HEAD
       @if($product->lock_products == "true") 
         <td><a href="#" class="btn btn-outline-warning text-dark disabled"><i class="fa fa-minus"></i></a></td>
       @else
@@ -72,6 +77,34 @@
         @else
           <button type="submit" class="btn btn-block btn-dark text-warning" onclick="return confirm('Are you sure to delete?')" name="button">Delete &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash text-light"></i></button>
         @endif 
+=======
+      @if($product->lock_products == "true")
+        <td><a href="#" class="btn btn-outline-warning text-dark disabled"><i class="fa fa-minus"></i></a></td>
+      @else
+        <td><a href="" class="btn btn-outline-warning text-dark"><i class="fa fa-minus"></i></a></td>
+      @endif
+      <td class="pt-3">{{$product->amount}}</td>
+      @if($product->lock_products == "true")
+        <td><a href="#" class="btn btn-outline-warning text-dark disabled"><i class="fa fa-plus"></i></a></td>
+      @else
+        <td><a href="" class="btn btn-outline-warning text-dark" disabled><i class="fa fa-plus"></i></a></td>
+      @endif
+      <td>
+        @if($product->lock_products == "true")
+          <a href="#" id="edit" class="btn btn-block btn-dark text-warning disabled">Edit &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-pencil" style="color:white;"></i></a> </td>
+        @else
+          <a href="{{route('products.edit',['product'=>$product->id])}}" id="edit" class="btn btn-block btn-dark text-warning ">Edit &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-pencil" style="color:white;"></i></a> </td>
+        @endif
+      <td>
+      <form action="{{url('products/'.$product->id)}}" method="POST">
+      @csrf
+      <input name="_method" id="delete" type="hidden" value="DELETE">
+        @if($product->lock_products == "true")
+          <a href="#" class="btn btn-block btn-dark text-warning disabled" name="button">Delete &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash text-light"></i></button>
+        @else
+          <button type="submit" class="btn btn-block btn-dark text-warning" onclick="return confirm('Are you sure to delete?')" name="button">Delete &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash text-light"></i></button>
+        @endif
+>>>>>>> refs/remotes/origin/master
       </form>
       </td>
     </tr>
