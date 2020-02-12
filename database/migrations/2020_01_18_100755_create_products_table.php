@@ -18,11 +18,6 @@ class CreateProductsTable extends Migration
             $table->string('lock_products')->default("false");
             $table->increments('id');
             $table->string('name');
-<<<<<<< HEAD
-=======
-            $table->integer('category_id');
-            $table->timestamps();
->>>>>>> refs/remotes/origin/master
             $table->integer('amount');
             $table->integer('category_id');
             $table->timestamps();
