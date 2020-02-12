@@ -16,12 +16,11 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             
             $table->string('lock_products')->default("false");
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('name');
-            $table->string('category');
-            $table->timestamps();
             $table->integer('amount');
-
+            $table->integer('category_id');
+            $table->timestamps();
         });
     }
 

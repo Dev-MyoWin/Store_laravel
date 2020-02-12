@@ -42,8 +42,9 @@ class ProductController extends Controller
       // $product->name=$request->product_name;
       // $product->category=$request->product_category;
       // $product->amount=$request->amount;
-      // $product->save();
-      Product::create(['name'=>$request->name,'category'=>$request->category,'amount'=>$request->amount]);
+      
+
+      Product::create(['name'=>$request->name,'amount'=>$request->amount,'category_id'=>$request->category_id]);
 
       return redirect()->route('products.index');
     }

@@ -12,7 +12,8 @@
       <th>No.</th>
       <th>Name</th>
       <th>Category</th>
-      <th>Created Date</th>  
+      <th>Created Date</th> 
+      <th></th> 
       <th></th>
       <th>Amount</th>
       <th></th>
@@ -37,7 +38,7 @@
       </th>
       <td class="pt-3"><?php echo $x;$x++?></td>
       <td class="pt-3">{{$product->name}}</td>
-      <td class="pt-3">{{$product->category}}</td>
+      <td class="pt-3">{{$product->category->name}}</td>
       <td class="pt-3">{{\Carbon\Carbon::parse($product->created_at)->diffForHumans()}}</td>
       @if($product->lock_products == "true") 
         <td><a href="#" class="btn btn-outline-secondary text-dark disabled"><i class="fa fa-minus"></i></a></td>
