@@ -58,22 +58,7 @@ class ProductController extends Controller
     {
         //
     }
-    public function lock(Request $request)
-    {
-        $id = $request->id;
-        $lock = Product::find($id);
-        if($lock->lock_products == 'false')
-        {
-            Product::where('id', '=', $id)->update(['lock_products'=>"true"]);
-        }
-        else{
-          Product::where('id', '=', $id)->update(['lock_products'=>"false"]);
-        }
-        return redirect()->route('products.index');
-
-
-    }
-
+    
     /**
      * Show the form for editing the specified resource.
      *
