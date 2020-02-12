@@ -1,17 +1,11 @@
 @extends('layouts.master')
 @section('title','Products')
 @section('content')
-
 @if(count($products)!=0)
 <div class="container">
   <div class="row">
-
   <h1 class=" my-5"><i class="fa fa-th">&nbsp;&nbsp;&nbsp;</i>Products</h1>
-
-
     <table class="table shadow">
-
-
   <thead>
     <tr align="center" class="table-secondary">
       <th>Lock</th>
@@ -19,7 +13,6 @@
       <th>Name</th>
       <th>Category</th>
       <th>Created Date</th>
-      
       <th></th>
       <th>Amount</th>
       <th></th>
@@ -55,9 +48,7 @@
       </form>
       </td>
     </tr>
-
     @else 
-
     <tr align="center">
       <th>
       <form action="{{route('unlock',['id'=>$product->id])}}" method="POST">
@@ -73,34 +64,24 @@
       <td><a href="" class="btn btn-outline-secondary text-dark"><i class="fa fa-minus"></i></a></td>
       <td class="pt-3">{{$product->amount}}</td>
       <td><a href="" class="btn btn-outline-secondary text-dark"><i class="fa fa-plus"></i></a></td>
-      <td> <a href="#" class="btn btn-block btn-secondary text-warning ">Edit &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-pencil" style="color:white;"></i></a> </td>
+      <td> <a href="#" class="btn btn-block btn-secondary text-warning disabled">Edit &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-pencil" style="color:white;"></i></a> </td>
       <td> 
-      <button type="submit" class="btn btn-block btn-secondary text-warning" name="button">Delete &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash text-light"></i></button>
+      <button type="submit" class="btn btn-block btn-secondary text-warning disabled" name="button">Delete &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash text-light"></i></button>
       </td>
     </tr>
     @endif
   </tbody>
   @endforeach
 </table>
-
 <div class="col-lg-12">
 <a href="{{route('products.create')}}" class="btn btn-dark btn-lg float-right mt-3 text-warning">  Add New Product &nbsp;&nbsp; <i class="fa fa-plus-circle" style="color:white"></i> </a>
-
 </div>
 </div>
-
 </div>
-
 @else
  <div class="jumbotron container bg-warning text-center my-5">
  <h1 class="display-4">No Product Data Avaiable Now..!</h1>
   <a class="btn btn-dark my-5 text-warning" style="font-weight:bold " href="{{route('products.create')}}" role="button">Add New Product &nbsp;&nbsp; <i class="fa fa-plus-circle text-warning"></i></a>
  </div>
  @endif
-
- <script>
-    function myfunction(){
-      confirm("Click Confirm to Delete");`
-    }
- </script>
 @endsection
