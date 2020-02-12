@@ -28,9 +28,6 @@
             <h1 class ="right uc mb-5">WELCOME TO OUR STORE</h1> 
             @if (Route::has('login'))
             <ul class="child hover fade-in">
-            <!-- <li class="all25 btn"><a href="resume.html">Register Now</li>
-            <li class="all25 btn"><a href="portfolio.html">Login <i class="fa fa-sign-in"></i></a></li>
-            <li class="all25 btn"><a href="#">about &nbsp; <i class="fa fa-id-card"></i></a></li> -->
             @auth
             <li class="all25 btn">
 			    <a href="{{ url('/home') }}">Home</a>
