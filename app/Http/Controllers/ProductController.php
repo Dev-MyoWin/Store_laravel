@@ -42,8 +42,7 @@ class ProductController extends Controller
       // $product->name=$request->product_name;
       // $product->category=$request->product_category;
       // $product->amount=$request->amount;
-      
-
+      // $product->save();
       Product::create(['name'=>$request->name,'amount'=>$request->amount,'category_id'=>$request->category_id]);
 
       return redirect()->route('products.index');
@@ -59,7 +58,7 @@ class ProductController extends Controller
     {
         //
     }
-    
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -81,7 +80,7 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
 
-        Product::where('id',$id)->update(['name'=>$request->name,'category'=>$request->category,'amount'=>$request->amount]);
+        Product::where('id',$id)->update(['name'=>$request->name,'category_id'=>$request->category_id,'amount'=>$request->amount]);
         return redirect()->route('products.index',['product'=>$id]);
     }
 

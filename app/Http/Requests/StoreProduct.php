@@ -15,6 +15,10 @@ class StoreProduct extends FormRequest
     {
         return true;
     }
+    public function product()
+    {
+      $product->category()->associate($category)->save();
+    }
 
     /**
      * Get the validation rules that apply to the request.
