@@ -108,4 +108,18 @@ class ProductController extends Controller
         }
         return redirect()->route('products.index');
     }
+
+    public function plusAmount(Request $request){
+        $id = $request->id;
+        $product = Product::find($id);
+        Product::where('id',$id)->update(['amount'=>$product->amount+1]);
+        return redirect()->route('products.index');
+    }
+
+    public function minusAmount(Request $request){
+        $id = $request->id;
+        $product = Product::find($id);
+        Product::where('id',$id)->update(['amount'=>$product->amount-1]);
+        return redirect()->route('products.index');
+    }
 }
