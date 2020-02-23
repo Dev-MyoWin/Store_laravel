@@ -25,7 +25,7 @@
             <div class="loader-section section-right"></div>
         </div>
         <div class="parent">
-            <h1 class ="right uc mb-5">WELCOME TO OUR STORE</h1> 
+            <h1 class ="right uc mb-5">WELCOME TO OUR STORE</h1>
             @if (Route::has('login'))
             <ul class="child hover fade-in">
             @auth
@@ -34,18 +34,18 @@
 			</li>
             @else
             <li class="all25 btn">
-				<a href="{{ route('login') }}" target="_blank">Login <i class="fa fa-sign-in"></i></a>
+				<a href="{{ route('login') }}">Login <i class="fa fa-sign-in"></i></a>
 			</li>
             @if (Route::has('register'))
             <li class="all25 btn">
-				<a href="{{ route('register') }}"" target="_blank">Register Now</a>
+				<a href="{{ route('register') }}"">Register Now</a>
             </li>
             @endif
             @endauth
             <li class="all25 btn"><a href="#">about &nbsp; <i class="fa fa-id-card"></i></a></li>
             </ul>
             @endif
-        </div> 
-        
+        </div>
+
     </body>
 </html>
