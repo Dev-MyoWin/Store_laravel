@@ -42,13 +42,13 @@
       @if($product->lock_products == "true")
         <td><a href="#" class="btn btn-outline-secondary text-dark disabled"><i class="fa fa-minus"></i></a></td>
       @else
-        <td><a href="" class="btn btn-outline-warning text-dark"><i class="fa fa-minus"></i></a></td>
+        <td><a href="{{route('minus-amount',['id'=>$product->id])}}" class="btn btn-outline-warning text-dark"><i class="fa fa-minus"></i></a></td>
       @endif
       <td class="pt-3">{{$product->amount}}</td>
       @if($product->lock_products == "true")
         <td><a href="#" class="btn btn-outline-secondary text-dark disabled"><i class="fa fa-plus"></i></a></td>
       @else
-        <td><a href="" class="btn btn-outline-warning text-dark"><i class="fa fa-plus"></i></a></td>
+        <td><a href="{{route('plus-amount',['id'=>$product->id])}}" class="btn btn-outline-warning text-dark"><i class="fa fa-plus"></i></a></td>
       @endif
       <td>
         @if($product->lock_products == "true")
