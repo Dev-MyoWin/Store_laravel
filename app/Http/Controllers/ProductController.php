@@ -80,7 +80,7 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
 
-        Product::where('id',$id)->update(['name'=>$request->name,'category_id'=>$request->category_id,'amount'=>$request->amount]);
+        Product::where('id',$id)->update(['name'=>$request->name,'amount'=>$request->amount]);
         return redirect()->route('products.index',['product'=>$id]);
     }
 

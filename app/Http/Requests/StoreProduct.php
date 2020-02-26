@@ -29,7 +29,7 @@ class StoreProduct extends FormRequest
     {
         return [
           'name'=>'required|unique:products',
-          'category_id'=>'required',
+          
           'amount'=>'required',
         ];
     }
