@@ -18,7 +18,7 @@ Route::get('/', function () {
 
 Route::resource('products','ProductController');
 Route::resource('categories','CategoryController');
-
+Route::resource('editors','EditorController');
 Auth::routes();
 
 Route::post('lock','ProductController@lock')->name('lock');
