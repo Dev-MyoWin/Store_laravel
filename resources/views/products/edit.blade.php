@@ -11,7 +11,7 @@
       @foreach ($errors->all() as $error)
       <p class="text-danger">{{$error}}</p>
       @endforeach
-  @endif 
+  @endif
 
  <br>
  <br>
@@ -25,19 +25,19 @@
 
     <div class="form-group">
     <label for="productName">Product Category</label>
-    <select name="category" class="form-control" id="">
+    <select name="category_id" class="form-control" id="">
     @foreach($categories as $category)
-    <option value="{{ $category->name}}" @php 
-    if($category->name == $edit->category)
+    <option value="{{ $category->id}}" @php
+    if($category->id == $edit->category_id)
     {
       echo "selected";
     }
-    
+
     @endphp>
 
     {{$category->name}}
     </option>
-    @endforeach    
+    @endforeach
     </select>
     </div>
 

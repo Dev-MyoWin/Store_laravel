@@ -86,7 +86,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
       $category = Category::find($id);
-      $products  = Category::whereId($id)->first()->products;
+      $products  = $category->products;
       $category->delete();
       foreach($products as $product)
       {

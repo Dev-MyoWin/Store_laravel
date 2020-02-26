@@ -20,7 +20,9 @@
       <th></th>
     </tr>
   </thead>
-  <?php $x=1;?>
+  @php
+    $productId = 0;
+  @endphp
 @foreach ($products as $product)
   <tbody>
     <tr align="center">
@@ -35,7 +37,7 @@
           @endif
         </form>
       </th>
-      <td class="pt-3"><?php echo $x;$x++?></td>
+      <td class="pt-3">{{$productId += 1}}</td>
       <td class="pt-3">{{$product->name}}</td>
       <td class="pt-3">{{$product->category->name}}</td>
       <td class="pt-3">{{\Carbon\Carbon::parse($product->created_at)->diffForHumans()}}</td>

@@ -67,7 +67,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        return view('products.edit',['edit'=>Product::find($id)],['categories'=>Category::all()]);
+      return view('products.edit',['edit'=>Product::find($id)],['categories'=>Category::all()]);
     }
 
     /**

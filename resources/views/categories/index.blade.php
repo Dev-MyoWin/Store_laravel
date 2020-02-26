@@ -16,11 +16,13 @@
       <th></th>
     </tr>
   </thead>
-  <?php $x=1;?>
+  @php
+    $categoryId = 0;
+  @endphp
 @foreach ($categories as $category)
   <tbody>
     <tr align="center">
-      <td class="pt-3"><?php echo $x;$x++?></td>
+      <td class="pt-3">{{$categoryId += 1}}</td>
       <td class="pt-3">{{$category->name}}</td>
       <td> <a href="{{route('categories.edit',['category'=>$category->id])}}" class="btn btn-dark text-warning btn-block">Edit &nbsp;&nbsp;&nbsp;<i class="fa fa-pencil text-light"></i></a> </td>
       <td>
@@ -32,7 +34,7 @@
        </td>
     </tr>
   </tbody>
- 
+
   @endforeach
 </table>
 <div class="col-sm-12">
