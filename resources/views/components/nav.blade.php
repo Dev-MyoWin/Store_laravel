@@ -31,7 +31,7 @@
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item mb-2" href="#"><i class="fa fa-user-plus float-left float-left"></i> &nbsp;&nbsp;Add Editor</a>
+                  <a class="dropdown-item mb-2" href="{{url('editors/create')}}"><i class="fa fa-user-plus float-left float-left"></i> &nbsp;&nbsp;Add Editor</a>
                   <a class="dropdown-item mb-2" href="#"><i class="fa fa-users float-left float-left"></i>&nbsp;&nbsp;View Editor</a>
                   <a class="dropdown-item mb-2" href="#"><i class="fa fa-clipboard float-left"></i>&nbsp;&nbsp;View Log</a>
                   <a class="dropdown-item mb-2" href="#"><i class="fa fa-trash float-left"></i>&nbsp;&nbsp;Erase All Data</a>

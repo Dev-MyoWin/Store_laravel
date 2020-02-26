@@ -28,3 +28,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('plus-amount','ProductController@plusAmount')->name('plus-amount');
 
 Route::get('minus-amount','ProductController@minusAmount')->name('minus-amount');
+
+Route::resource('editors','EditorController');

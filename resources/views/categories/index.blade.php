@@ -27,7 +27,7 @@
       <form action="{{url('categories/'.$category->id)}}" method="POST">
       @csrf
       <input name="_method" type="hidden" value="DELETE">
-      <button type="submit" class="btn btn-block btn-dark text-warning" onclick="return confirm('Are you sure to delete?')" name="button">Delete &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash text-light"></i></button>
+      <button type="submit" class="btn btn-block btn-dark text-warning" onClick="mensaje2()">Delete &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash text-light"></i></button>
       </form>
        </td>
     </tr>
@@ -47,4 +47,24 @@
   <a class="btn btn-dark my-5 text-warning" style="font-weight:bold " href="{{route('categories.create')}}" role="button">Add New Category &nbsp;&nbsp; <i class="fa fa-plus-circle text-warning"></i></a>
  </div>
 @endif
+
+<script>
+  function mensaje2() {
+    swal({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(function() {
+      swal(
+        'Deleted!',
+        'Your file has been deleted.',
+        'success'
+      )
+    })
+  }
+</script>
 @endsection
