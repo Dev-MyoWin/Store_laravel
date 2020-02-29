@@ -84,4 +84,48 @@
  </div>
  @endif
 
+
+
+  </div>
+</div>
+
+
+<div class="container">
+<div class="row">
+<div class="col-md-4">
+ <div class="card-deck">
+  <div class="card">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKUAAAB8CAMAAAA/xIAPAAAAVFBMVEXDw8MAAACysrIeHh4MDAzHx8dwcHBqamptbW2srKzKysoRERG4uLg+Pj47OzshISGjo6NWVlZiYmKbm5uUlJQtLS2MjIx8fHxJSUmEhIQ0NDQnJyfEEekwAAABbElEQVR4nO3Y0W6CQBBAUVYdKcOCKNVa+P//rCgoiAH6NEtyz5MBEm9gIutGEQAAAAAAAAAAAADg32Qpy0a/WcqbdYrPDttlDplZpmzSPF4mTzd2lbu9LppK3e9MK2/fLapzBfaVUpziYibBvFIv7qbUySvNK6WJdLmfvNK6Ujf3ysN0hHVldy+HZ9RHgyjzSv1pKr8HDVLW2aDKvDLSMt4XOjy+da7qH7GvjEaLCcma2xv3ygOoHB2+z8BtCl6Z4VVK6VqvBUYwld1TF3/uKo/BVWrSviXl6p6eoxlIpRTOXZrP+ut6uvd7GJXi60eTFLt+Zd2OZhiVen/MlRdJ3cBVw6nsHvNRT+7Nr4ZS2Qxlm/ke2Y5mAJUSVeO4p6pZdwRQqR/uYM9RQ6h8LNYnXNS+UpJ0pjJN7P9Daj0T6dzZvnL02/PBSawrkyVsK9P8axnLHZhV7GatY2cwWscuKwAAAAAAAAAAAACs1h/EKxXGBM7AHgAAAABJRU5ErkJggg==" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+
+       @if($product->lock_products == "true")
+          <a href="#" id="edit" class="btn float-left btn-secondary text-warning disabled" aria-disabled="true">Edit &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-pencil" style="color:white;"></i></a> </td>
+        @else
+          <a href="{{route('products.edit',['product'=>$product->id])}}" id="edit" class="btn float-left btn-dark text-warning ">Edit &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-pencil" style="color:white;"></i></a> </td>
+        @endif
+
+      <form action="{{url('products/'.$product->id)}}" method="POST">
+      @csrf
+      <input name="_method" id="delete" type="hidden" value="DELETE">
+        @if($product->lock_products == "true")
+          <a href="#" class="btn float-right btn-secondary text-warning disabled" name="button" aria-disabled="true">Delete &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash text-light"></i></button>
+        @else
+          <button type="submit" class="btn float-right btn-dark text-warning" onclick="return confirm('Are you sure to delete?')" name="button">Delete &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash text-light"></i></button>
+        @endif
+      </form>
+
+
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">Last updated {{\Carbon\Carbon::parse($product->created_at)->diffForHumans()}}</small>
+    </div>
+  </div>
+</div>
+</div>
+
+</div>
+</div>
 @endsection
+
+

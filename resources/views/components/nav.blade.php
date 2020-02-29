@@ -33,7 +33,7 @@
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                   @if(Auth::user()->role->name == "admin")
                   <a class="dropdown-item mb-2" href="{{route('editors.create')}}"><i class="fa fa-user-plus float-left float-left"></i> &nbsp;&nbsp;Add Editor</a>
-                  <a class="dropdown-item mb-2" href="#"><i class="fa fa-users float-left float-left"></i>&nbsp;&nbsp;View Editor</a>
+                  <a class="dropdown-item mb-2" href="{{route('editors.index')}}"><i class="fa fa-users float-left float-left"></i>&nbsp;&nbsp;View Editor</a>
                   <a class="dropdown-item mb-2" href="#"><i class="fa fa-clipboard float-left"></i>&nbsp;&nbsp;View Log</a>
                   <a class="dropdown-item mb-2" href="#"><i class="fa fa-trash float-left"></i>&nbsp;&nbsp;Erase All Data</a>
                   @endif
