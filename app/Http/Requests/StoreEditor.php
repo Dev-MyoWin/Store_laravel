@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreProduct extends FormRequest
+class StoreEditor extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,10 +15,6 @@ class StoreProduct extends FormRequest
     {
         return true;
     }
-    public function product()
-    {
-      $product->category()->associate($category)->save();
-    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -28,9 +24,10 @@ class StoreProduct extends FormRequest
     public function rules()
     {
         return [
-          'name'=>'required|unique:products',
-          
-          'amount'=>'required',
+            'name'=>'required',
+          'email'=>'required|unique:users',
+          'password'=>'required',
+            
         ];
     }
 }

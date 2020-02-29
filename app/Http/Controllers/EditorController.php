@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Category;
-use App\Product;
+
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Http\Requests\StoreCategory;
-class CategoryController extends Controller
+use Illuminate\Support\Facades\Hash;
+use App\User;
+use App\Http\Requests\StoreEditor;
+class EditorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('categories.index',['categories'=>Category::all()]);
+        //
     }
 
     /**
@@ -25,7 +25,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('categories.create');
+        return view('editors.create');
     }
 
     /**
@@ -34,13 +34,10 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCategory $request)
+    public function store(StoreEditor $request)
     {
-    //   $category= new Category;
-    //   $category->name=$request->category_name;
-    //   $category->save();
-     Category::create(['name'=>$request->name]);
-      return redirect()->route('categories.index');
+        User::create(['name'=>$request->name,'email'=>$request->email,'password'=>Hash::make($request->password)]);
+        return redirect()->route('products.index');
     }
 
     /**
@@ -62,7 +59,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        return view('categories.edit',['edit'=>Category::find($id)]);
+        //
     }
 
     /**
@@ -74,8 +71,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-       Category::where('id',$id)->update(['name'=>$request->name]);
-       return redirect()->route('categories.index',['category'=>$id]);
+        //
     }
 
     /**
@@ -86,14 +82,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-      $category = Category::find($id);
-      // $products  = Category::whereId($id)->first()->products;
-      $products  = $category->products;
-      $category->delete();
-      foreach($products as $product)
-      {
-        $product->delete();
-      }
-      return redirect()->route('categories.index');
+        //
     }
 }
