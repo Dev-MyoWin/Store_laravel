@@ -30,3 +30,5 @@ Route::get('plus-amount','ProductController@plusAmount')->name('plus-amount');
 Route::get('minus-amount','ProductController@minusAmount')->name('minus-amount');
 
 Route::resource('editors','EditorController');
+
+Route::get('products/delete/{id}', 'ProductController@delete')->name('product-delete');

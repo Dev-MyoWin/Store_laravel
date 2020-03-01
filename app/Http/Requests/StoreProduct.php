@@ -29,8 +29,8 @@ class StoreProduct extends FormRequest
     {
         return [
           'name'=>'required|unique:products',
-          
-          'amount'=>'required',
+          'image' =>'required',
+          'amount'=>'required'
         ];
     }
 }

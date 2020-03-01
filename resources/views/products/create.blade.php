@@ -15,12 +15,20 @@
 
  <br>
  <br>
-  <form action="{{url('products')}}" method="POST">
+  <form action="{{url('products')}}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
     <label for="productName" >Product Name</label>
-    <input type="text" class="form-control" id="ProductName" name="name">
+    <input type="text" class="form-control" id="ProductName" name="name" value="{{old('name')}}">
     </div>
+
+    <div class="form-group row">
+    <label for="inputTitle" class="col-form-label">Upload Image</label>
+    <div class="col-sm-12">
+      <input type="file" class="custom-file-input" name="image" id="inputGroupFile01" value="{{old('image')}}">
+      <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+    </div>
+  </div>
 
     <div class="form-group">
     <label for="productName">Product Category</label>
@@ -35,7 +43,7 @@
 
     <div class="form-group">
     <label for="productName">Amount</label>
-    <input type="number" class="form-control" id="Amount" name="amount">
+    <input type="number" class="form-control" id="Amount" name="amount" value="{{old('amount')}}">
     </div>
 
     <div class="form-group row">

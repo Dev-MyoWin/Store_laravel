@@ -1,7 +1,87 @@
 @extends('layouts.master')
 @section('title','Products')
 @section('content')
-@if(count($products)!=0)
+
+<div class="container">
+  <div class="" style="display: flex;flex-wrap: wrap;flex-direction: row;justify-content: space-around;">
+    @forelse ($products as $product)
+          <div class="scale shadow my-4">
+            <div class="card" style="width: 18rem;height: 450px;">
+    <form action="{{route('lock',['id'=>$product->id])}}" method="POST">
+    @csrf
+      <input name="_method" type="hidden">
+      @if($product->lock_products == "true")
+        <button type="submit" class="btn btn-outline-dark"><i class="fa fa-lock"></i></button>
+                <div class="card-body">
+                  <div class="card-subtitle mb-2 text-primary text-right">
+                    <i class="fa fa-clock-o" style="font-size:20px"></i>&nbsp;&nbsp;{{\Carbon\Carbon::parse($product->created_at)->diffForHumans()}}
+                  </div>
+            <div class="card-image mb-2">
+              <img class="image" src="{{asset('image/author/'.$product->image)}}" class="img-fluid">
+            </div>
+                  <h5 class="card-title mb-3">
+                    <strong>{{$product->name}}</strong>
+                  </h5>
+                  <h6 class="card-subtitle mb-3">
+                    (Category- {{$product->category->name}})
+                  </h6>
+                  <div class="card-text my-3 text-center">
+                    <a href="#" class="btn btn-outline-secondary text-dark disabled"><i class="fa fa-minus"></i></a>
+                    <span>{{$product->amount}}</span>
+                    <a href="#" class="btn btn-outline-secondary text-dark disabled"><i class="fa fa-plus"></i></a>
+                  </div>
+                  <div class="my-3">
+                    <a href="#" id="edit" class="btn btn-secondary text-warning disabled float-right" aria-disabled="true">Edit &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-pencil" style="color:white;"></i></a>
+                    <a href="#" class="btn btn-secondary text-warning disabled float-left" name="button" aria-disabled="true">Delete &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash text-light"></i></a>
+                  </div>
+                </div>
+      @else
+        <button type="submit" class="btn btn-outline-dark"><i class="fa fa-unlock-alt"></i></button>
+                <div class="card-body">
+                  <div class="card-subtitle mb-2 text-primary text-right">
+                    <i class="fa fa-clock-o" style="font-size:20px"></i>&nbsp;&nbsp;{{\Carbon\Carbon::parse($product->created_at)->diffForHumans()}}
+                  </div>
+            <div class="card-image mb-2">
+              <img class="image" src="{{asset('image/author/'.$product->image)}}" class="img-fluid">
+            </div>
+                  <h5 class="card-title mb-3">
+                    <strong>{{$product->name}}</strong>
+                  </h5>
+                  <h6 class="card-subtitle mb-3">
+                    (Category- {{$product->category->name}})
+                  </h6>
+                  <div class="card-text my-3 text-center">
+                    <a href="{{route('minus-amount',['id'=>$product->id])}}" class="btn btn-outline-warning text-dark"><i class="fa fa-minus"></i></a>
+                    <span>{{$product->amount}}</span>
+                    <a href="{{route('plus-amount',['id'=>$product->id])}}" class="btn btn-outline-warning text-dark"><i class="fa fa-plus"></i></a>
+                  </div>
+                  <div class="my-3">
+                    <a href="{{route('products.edit',['product'=>$product->id])}}" id="edit" class="btn btn-dark text-warning float-right">Edit &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-pencil" style="color:white;"></i></a>
+                    <a href="{{route('product-delete',$product->id)}}" class="btn btn-dark text-warning float-left" onclick="return confirm('Are you sure to delete?')">Delete &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash text-light"></i></a>
+                  </div>
+                </div>
+      @endif
+    </form>
+  </div>
+  </div>
+          @empty
+          <div class="jumbotron col-sm-12 mt-5">
+            <h1 class="display-4">No data available !!</h1>
+            <p class="text-info">You can also bo a star author. Gettion Start Now.</p>
+            <hr class="my-4">
+            <a href="{{route('products.create')}}" class="btn btn-info float-right">Add Status</a>
+          </div>
+        @endforelse
+  </div>
+  <div class="my-5 mx-auto-1">
+    {{ $products->links() }}
+  </div>
+</div>
+
+
+
+
+<!-- @if(count($products)!=0)
 <div class="container">
   <div class="row">
   <h1 class=" my-5"><i class="fa fa-th">&nbsp;&nbsp;&nbsp;</i>Products</h1>
@@ -84,6 +164,6 @@
  <h1 class="display-4">No Product Data Avaiable Now..!</h1>
   <a class="btn btn-dark my-5 text-warning" style="font-weight:bold " href="{{route('products.create')}}" role="button">Add New Product &nbsp;&nbsp; <i class="fa fa-plus-circle text-warning"></i></a>
  </div>
- @endif
+ @endif -->
 
 @endsection

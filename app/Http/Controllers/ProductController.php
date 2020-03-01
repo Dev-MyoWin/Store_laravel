@@ -15,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('products.index',['products'=>Product::all()]);
+        return view('products.index',['products'=>Product::paginate(9)]);
     }
 
     /**
@@ -43,7 +43,13 @@ class ProductController extends Controller
       // $product->category=$request->product_category;
       // $product->amount=$request->amount;
       // $product->save();
-      Product::create(['name'=>$request->name,'amount'=>$request->amount,'category_id'=>$request->category_id]);
+      $file = $request->file('image');
+
+      $file_name = uniqid().'_'.$request->image->getClientOriginalName();
+
+      $file->move(public_path().'/image/author/',$file_name);
+
+      Product::create(['image'=>$file_name,'name'=>$request->name,'amount'=>$request->amount,'category_id'=>$request->category_id]);
 
       return redirect()->route('products.index');
     }
@@ -79,8 +85,13 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+      $file = $request->file('image');
 
-        Product::where('id',$id)->update(['name'=>$request->name,'amount'=>$request->amount]);
+        $file_name = uniqid().'_'.$request->image->getClientOriginalName();
+
+        $file->move(public_path().'/image/author/',$file_name);
+
+        Product::where('id',$id)->update(['image'=>$file_name,'name'=>$request->name,'amount'=>$request->amount]);
         return redirect()->route('products.index',['product'=>$id]);
     }
 
@@ -92,9 +103,10 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $product=Product::find($id);
-        $product->delete();
-        return redirect()->route('products.index');
+        // $product=Product::find($id);
+        // return $product;
+        // $product->delete();
+        // return redirect()->route('products.index');
     }
 
     public function lock(Request $request){
@@ -121,5 +133,11 @@ class ProductController extends Controller
         $product = Product::find($id);
         Product::where('id',$id)->update(['amount'=>$product->amount-1]);
         return redirect()->route('products.index');
+    }
+    public function delete($id)
+    {
+      $product=Product::find($id);
+      $product->delete();
+      return redirect()->route('products.index');
     }
 }
