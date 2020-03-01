@@ -99,6 +99,11 @@
 <form class="G rounded shadow" action="{{url('editors')}}" method="POST">
 @csrf
    <h3>Editor Registration</h3>
+   @if($errors->any())
+      @foreach ($errors->all() as $error)
+      <p class="text-danger">{{$error}}</p>
+      @endforeach
+  @endif
    <div><i class="fa fa-exclamation-circle fn H"></i><input type="text" name="name" id="name" placeholder="NAME"><i class="fa fa-check pn"></i></div>
    
    <div><i class="fa fa-exclamation-circle fe H"></i><input type="email" name="email" placeholder="EMAIL" id="email"><i class="fa fa-check pe"></i></div>
@@ -167,39 +172,7 @@ $('#pass').on("change blur", function () {
 });
 
 $('#sub').click(function (evt) {
-    var n = $('#name').val();
-    var em = $('#email').val();
-    var pa = $('#pass').val();
-    // if (!validateName(n) || n.length == 0 || !validateEmail(em) || em.length == 0 ||
-    //     pa.length <= 6 || pa.length >= 12) {
-    //     alert("Error! Please check your details");
-    //     evt.preventDefault();
-    // }
-    // else {
-    //     alert("Form submitted successfully");
-    // }
 
-    if (!validateName(n) || n.length == 0 ) {
-        alert("Error! Please fill your name");
-        evt.preventDefault();
-    }
-   
-    else if (!validateEmail(em) || em.length == 0 ) {
-        alert("Error! Please check your email type");
-        evt.preventDefault();
-    }
-   
-    else if (pa.length <= 6 || pa.length >= 12) {
-        alert("Error! Please fill your password between 6 & 12 characters");
-        evt.preventDefault();
-    }
-  
-    else {
-         alert("Form submitted successfully");
-    }
-    
-
-    
 });
  </script>
 </body>

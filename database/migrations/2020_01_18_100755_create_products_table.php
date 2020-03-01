@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('lock_products')->default("false");
             $table->increments('id');
             $table->string('name');
-            $table->integer('amount');
+            $table->text('amount');
             $table->text('image')->nullable();
             $table->integer('category_id');
             $table->timestamps();

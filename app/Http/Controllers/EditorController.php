@@ -15,7 +15,7 @@ class EditorController extends Controller
      */
     public function index()
     {
-        //
+        return view('editors.index',['editors'=>User::all()]);
     }
 
     /**

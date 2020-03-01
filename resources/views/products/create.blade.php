@@ -43,7 +43,7 @@
 
     <div class="form-group">
     <label for="productName">Amount</label>
-    <input type="number" class="form-control" id="Amount" name="amount" value="{{old('amount')}}">
+    <input type="text" class="form-control" id="Amount" name="amount" value="{{old('amount')}}">
     </div>
 
     <div class="form-group row">

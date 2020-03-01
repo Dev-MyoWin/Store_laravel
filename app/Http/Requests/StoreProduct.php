@@ -30,7 +30,7 @@ class StoreProduct extends FormRequest
         return [
           'name'=>'required|unique:products',
           'image' =>'required',
-          'amount'=>'required'
+          'amount'=>'required|min:1|max:6'
         ];
     }
 }
