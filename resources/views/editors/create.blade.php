@@ -5,13 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
@@ -99,24 +93,33 @@
 <form class="G rounded shadow" action="{{url('editors')}}" method="POST">
 @csrf
    <h3>Editor Registration</h3>
+
+   <div><i class="fa fa-exclamation-circle fn H"></i><input type="text" name="name" id="name" placeholder="NAME"><i class="fa fa-check pn H"></i></div>
+   
    @if($errors->any())
-      @foreach ($errors->all() as $error)
+      @foreach ($errors->get('name') as $error)
       <p class="text-danger">{{$error}}</p>
       @endforeach
   @endif
-   <div><i class="fa fa-exclamation-circle fn H"></i><input type="text" name="name" id="name" placeholder="NAME"><i class="fa fa-check pn"></i></div>
-   
-   <div><i class="fa fa-exclamation-circle fe H"></i><input type="email" name="email" placeholder="EMAIL" id="email"><i class="fa fa-check pe"></i></div>
-   
-   <div><i class="fa fa-exclamation-circle fp H"></i><input type="password" name="password" id="pass" placeholder="PASSWORD"><i class="fa fa-check pp"></i></div>   
-   
+   <div><i class="fa fa-exclamation-circle fe H"></i><input type="email" name="email" placeholder="EMAIL" id="email"><i class="fa fa-check pe H"></i></div>
+   @if($errors->any())
+      @foreach ($errors->get('email') as $error)
+      <p class="text-danger">{{$error}}</p>
+      @endforeach
+  @endif
+   <div><i class="fa fa-exclamation-circle fp H"></i><input type="password" name="password" id="pass" placeholder="PASSWORD"><i class="fa fa-check pp H"></i></div>   
+   @if($errors->any())
+      @foreach ($errors->get('password') as $error)
+      <p class="text-danger">{{$error}}</p>
+      @endforeach
+  @endif
    <div><i class="fa fa-exclamation-circle dn H"></i><input id="sub" type="submit" value="register"><i class="fa fa-check dn"></i></div>
  </form>
 
 
 <script>
      //Initial Image hiding
-$('.fa').css('color', 'transparent');
+$('.H').css('color', 'transparent');
 
 //Validate Functions
 function validateEmail(em) {

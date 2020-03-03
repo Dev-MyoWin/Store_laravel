@@ -82,6 +82,8 @@ class EditorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        $editor=User::find($id);
+        $editor->delete();
     }
 }
