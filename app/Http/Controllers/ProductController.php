@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Product;
 use App\Category;
 use App\History;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreProduct;
@@ -154,5 +155,31 @@ class ProductController extends Controller
       $product->delete();
       History::create(['description'=> Auth::user()->name." deleted "." product ".$product->name]);
       return redirect()->route('products.index');
+    }
+
+    public function deleteAllData()
+    {
+        $categories = Category::all();
+        $products = Product::all();
+        $histories = History::all();
+        $editors = User::where('role_id',1)->get();
+
+        foreach($categories as $category)
+        {
+            $category->delete();
+        }
+        foreach($products as $product)
+        {
+            $product->delete();
+        }
+        foreach($histories as $history)
+        {
+            $history->delete();
+        }
+        foreach($editors as $editor)
+        {
+            $editor->delete();
+        }
+        return redirect()->route('products.index');
     }
 }
