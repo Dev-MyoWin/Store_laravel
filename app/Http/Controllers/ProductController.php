@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Product;
 use App\Category;
+use App\History;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreProduct;
 
@@ -51,6 +53,8 @@ class ProductController extends Controller
 
       Product::create(['image'=>$file_name,'name'=>$request->name,'amount'=>$request->amount,'category_id'=>$request->category_id]);
 
+      History::create(['description'=> Auth::user()->name." added "." product ".$request->name]);
+
       return redirect()->route('products.index');
     }
 
@@ -85,13 +89,18 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $file = $request->file('image');
+        $file = $request->file('image');
+
+        $product = Product::where('id',$id)->first();
 
         $file_name = uniqid().'_'.$request->image->getClientOriginalName();
 
         $file->move(public_path().'/image/author/',$file_name);
 
         Product::where('id',$id)->update(['image'=>$file_name,'name'=>$request->name,'amount'=>$request->amount]);
+        
+        History::create(['description'=> Auth::user()->name." edited "." product ".$product->name]." as ".$request->name);
+
         return redirect()->route('products.index',['product'=>$id]);
     }
 
@@ -111,12 +120,15 @@ class ProductController extends Controller
 
     public function lock(Request $request){
         $id = $request->id;
+        $product = Product::whereId($id)->first();
         $lock = Product::find($id);
         if($lock->lock_products == 'false'){
         Product::where('id',$id)->update(['lock_products'=>'true']);
+        History::create(['description'=> Auth::user()->name." locked "." product ".$product->name]);
         }
         else{
         Product::where('id',$id)->update(['lock_products'=>'false']);
+        History::create(['description'=> Auth::user()->name." unlocked "." product ".$product->name]);
         }
         return redirect()->route('products.index');
     }
@@ -125,6 +137,7 @@ class ProductController extends Controller
         $id = $request->id;
         $product = Product::find($id);
         Product::where('id',$id)->update(['amount'=>$product->amount+1]);
+        History::create(['description'=> Auth::user()->name." added "." product amount of ".$product->name]);
         return redirect()->route('products.index');
     }
 
@@ -132,12 +145,14 @@ class ProductController extends Controller
         $id = $request->id;
         $product = Product::find($id);
         Product::where('id',$id)->update(['amount'=>$product->amount-1]);
+        History::create(['description'=> Auth::user()->name." subedd "." product amount of ".$product->name]);
         return redirect()->route('products.index');
     }
     public function delete($id)
     {
       $product=Product::find($id);
       $product->delete();
+      History::create(['description'=> Auth::user()->name." deleted "." product ".$product->name]);
       return redirect()->route('products.index');
     }
 }

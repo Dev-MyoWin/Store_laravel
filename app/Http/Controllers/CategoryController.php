@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 use App\Category;
 use App\Product;
+use App\History;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreCategory;
 class CategoryController extends Controller
 {
@@ -39,7 +41,8 @@ class CategoryController extends Controller
     //   $category= new Category;
     //   $category->name=$request->category_name;
     //   $category->save();
-     Category::create(['name'=>$request->name]);
+      Category::create(['name'=>$request->name]);
+      History::create(['description'=> Auth::user()->name." added "." category ".$request->name]);	
       return redirect()->route('categories.index');
     }
 
@@ -75,6 +78,7 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
        Category::where('id',$id)->update(['name'=>$request->name]);
+       History::create(['description'=> Auth::user()->name." edited "." category ".$request->name]);	
        return redirect()->route('categories.index',['category'=>$id]);
     }
 
@@ -87,6 +91,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
       $category = Category::find($id);
+      History::create(['description'=> Auth::user()->name." deleted "." category ".$category->name]);	
       // $products  = Category::whereId($id)->first()->products;
       $products  = $category->products;
       $category->delete();
