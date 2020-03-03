@@ -16,17 +16,25 @@
       <th></th>
     </tr>
   </thead>
-  <?php $x=1;?>
+  @php
+    $categoryId = 0;
+  @endphp
 @foreach ($categories as $category)
   <tbody>
     <tr align="center">
-      <td class="pt-3"><?php echo $x;$x++?></td>
+      <td class="pt-3">{{$categoryId += 1}}</td>
       <td class="pt-3">{{$category->name}}</td>
       <td> <a href="{{route('categories.edit',['category'=>$category->id])}}" class="btn btn-dark text-warning btn-block">Edit &nbsp;&nbsp;&nbsp;<i class="fa fa-pencil text-light"></i></a> </td>
-      <td> <a href="#" class="btn btn-dark text-warning btn-block">Delete &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash text-light"></i></a> </td>
+      <td>
+      <form action="{{url('categories/'.$category->id)}}" method="POST">
+      @csrf
+      <input name="_method" type="hidden" value="DELETE">
+      <button type="submit" class="btn btn-block btn-dark text-warning" onClick="mensaje2()">Delete &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash text-light"></i></button>
+      </form>
+       </td>
     </tr>
   </tbody>
- 
+
   @endforeach
 </table>
 <div class="col-sm-12">
@@ -36,10 +44,29 @@
 </div>
 
 @else
- <div class="jumbotron text-center">
- <h1 class="display-4">No Data Avaiable Now..!</h1>
-  <a class="btn btn-info" href="{{route('categories.create')}}" role="button">Learn more</a>
+ <div class="jumbotron container bg-warning text-center my-5">
+ <h1 class="display-4">No Category Data Avaiable Now..!</h1>
+  <a class="btn btn-dark my-5 text-warning" style="font-weight:bold " href="{{route('categories.create')}}" role="button">Add New Category &nbsp;&nbsp; <i class="fa fa-plus-circle text-warning"></i></a>
  </div>
-  
 @endif
+
+<script>
+  function mensaje2() {
+    swal({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(function() {
+      swal(
+        'Deleted!',
+        'Your file has been deleted.',
+        'success'
+      )
+    })
+  }
+</script>
 @endsection

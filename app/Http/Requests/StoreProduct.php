@@ -15,6 +15,10 @@ class StoreProduct extends FormRequest
     {
         return true;
     }
+    public function product()
+    {
+      $product->category()->associate($category)->save();
+    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -24,9 +28,9 @@ class StoreProduct extends FormRequest
     public function rules()
     {
         return [
-          'name'=>'required',
-          'category'=>'required',
-          'amount'=>'required',
+          'name'=>'required|unique:products',
+          'image' =>'required',
+          'amount'=>'required|min:1|max:6'
         ];
     }
 }

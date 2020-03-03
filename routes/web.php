@@ -12,15 +12,30 @@
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('welcome');
 });
 
-Route::group(['middleware' => ['auth']], function () {
-             Route::resource('products','ProductController');
-    
-   });
-Route::resource('categories','CategoryController')->only(['index','create','store','edit','update']);
+
+Route::resource('products','ProductController');
+
+Route::resource('categories','CategoryController');
+
+Route::resource('editors','EditorController');
 
 Auth::routes();
 
+Route::post('lock','ProductController@lock')->name('lock');
+
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('plus-amount','ProductController@plusAmount')->name('plus-amount');
+
+Route::get('minus-amount','ProductController@minusAmount')->name('minus-amount');
+
+Route::resource('editors','EditorController');
+
+Route::get('products/delete/{id}', 'ProductController@delete')->name('product-delete');
+
+Route::resource('histories','HistoryController');
+
+ROute::get('delete-all','HistoryController@deleteAll')->name('delete-all');

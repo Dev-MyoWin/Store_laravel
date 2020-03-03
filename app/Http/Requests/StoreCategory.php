@@ -16,6 +16,11 @@ class StoreCategory extends FormRequest
         return true;
     }
 
+    public function category()
+    {
+      $category->product()->save($product);
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,7 +29,7 @@ class StoreCategory extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required',
+            'name'=>'required|unique:categories'
         ];
     }
 }
