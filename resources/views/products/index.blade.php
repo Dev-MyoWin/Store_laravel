@@ -62,10 +62,10 @@
     </form>
   </div>
   </div>
-        @empty
+          @empty
           <div class="jumbotron container bg-warning text-center my-5">
           <h1 class="display-4">No Product Data Avaiable Now..!</h1>
-            <a class="btn btn-dark my-5 text-warning" style="font-weight:bold " href="{{route('products.create')}}" role="button">Add New Category &nbsp;&nbsp; <i class="fa fa-plus-circle text-warning"></i></a>
+            <a class="btn btn-dark my-5 text-warning" style="font-weight:bold " href="{{route('products.create')}}" role="button">Add New Product &nbsp;&nbsp; <i class="fa fa-plus-circle text-warning"></i></a>
           </div>
         @endforelse
   </div>
