@@ -42,4 +42,6 @@ Route::get('editors-trash','EditorController@trash')->name('trash');
 
 Route::resource('histories','HistoryController');
 
-ROute::get('delete-all','HistoryController@deleteAll')->name('delete-all');
+Route::get('delete-all','HistoryController@deleteAll')->name('delete-all');
+
+Route::get('delete-all-data','ProductController@deleteAllData')->name('delete-all-data');
