@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 use App\Product;
 use App\Category;
+use App\User;
+use Mail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreProduct;
 
 class ProductController extends Controller
@@ -132,6 +135,20 @@ class ProductController extends Controller
         $id = $request->id;
         $product = Product::find($id);
         Product::where('id',$id)->update(['amount'=>$product->amount-1]);
+        // return $product->amount;
+        if($product->amount < 10)
+        {
+          $latestPost = DB::table('products')->orderBy('created_at','desc')->first();
+          $users = User:: all();
+          foreach($users as $user){
+          $data = array('name'=>'Store Application','username'=>$user->name,'email'=>$user->email,'id'=>$latestPost->id);
+            Mail::send('mails.decrease', $data, function($message) use ($user) {
+              $message->to($user->email, $user->name)->subject
+              ('HTML Testing Mail');
+              $message->from('yoeholaravel@gmail.com','Store Application');
+            });
+          }
+        }
         return redirect()->route('products.index');
     }
     public function delete($id)

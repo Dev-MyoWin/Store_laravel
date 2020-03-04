@@ -26,7 +26,13 @@
                   </h5>
                   <div class="card-text my-3 text-center">
                     <a href="#" class="btn btn-sm btn-outline-secondary text-dark disabled"><i class="fa fa-minus"></i></a>
-                      <strong class="mx-5">{{$product->amount}}</strong>
+                    @if($product->amount < 10)
+                      <strong class="mx-5 text-danger">{{$product->amount}}</strong>
+                    @elseif($product->amount < 100)
+                      <strong class="mx-5 text-success">{{$product->amount}}</strong>
+                    @else
+                      <strong class="mx-5 text-primary">{{$product->amount}}</strong>
+                    @endif
                     <a href="#" class="btn btn-sm btn-outline-secondary text-dark disabled"><i class="fa fa-plus"></i></a>
                   </div>
                   <div class="my-3">
@@ -50,7 +56,13 @@
                   </h5>
                   <div class="card-text my-3 text-center">
                     <a href="{{route('minus-amount',['id'=>$product->id])}}" class="btn btn-outline-warning btn-sm text-dark"><i class="fa fa-minus"></i></a>
-                    <strong class="mx-5">{{$product->amount}}</strong>
+                    @if($product->amount < 10)
+                      <strong class="mx-5 text-danger">{{$product->amount}}</strong>
+                    @elseif($product->amount < 100)
+                      <strong class="mx-5 text-success">{{$product->amount}}</strong>
+                    @else
+                      <strong class="mx-5 text-primary">{{$product->amount}}</strong>
+                    @endif
                     <a href="{{route('plus-amount',['id'=>$product->id])}}" class="btn btn-outline-warning btn-sm text-dark"><i class="fa fa-plus"></i></a>
                   </div>
                   <div class="my-3">
