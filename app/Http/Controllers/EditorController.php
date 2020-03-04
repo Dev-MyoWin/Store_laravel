@@ -29,6 +29,11 @@ class EditorController extends Controller
     {
         return view('editors.create');
     }
+    public function trash(){
+        $data=User::onlyTrashed()->get();
+       
+        return view('editors.trash',['data' =>$data]);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -40,7 +45,7 @@ class EditorController extends Controller
     {
         User::create(['name'=>$request->name,'email'=>$request->email,'password'=>Hash::make($request->password)]);
         History::create(['description'=> Auth::user()->name." was added "." editor ".$request->name]);
-        return redirect()->route('products.index');
+        return redirect()->route('editors.index');
     }
 
     /**
@@ -88,5 +93,6 @@ class EditorController extends Controller
         
         $editor=User::find($id);
         $editor->delete();
+        return redirect()->route('editors.index');
     }
 }

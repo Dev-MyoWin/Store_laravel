@@ -38,6 +38,7 @@ Route::get('minus-amount','ProductController@minusAmount')->name('minus-amount')
 Route::resource('editors','EditorController');
 Route::get('editors/delete/{id}', 'EditorController@destroy')->name('editors.destroy');
 Route::get('products/delete/{id}', 'ProductController@delete')->name('product-delete');
+Route::get('editors-trash','EditorController@trash')->name('trash');
 
 Route::resource('histories','HistoryController');
 
