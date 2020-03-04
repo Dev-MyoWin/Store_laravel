@@ -89,4 +89,11 @@ class EditorController extends Controller
         $editor=User::find($id);
         $editor->delete();
     }
+
+    public function softDelete()
+    {
+        $trash = User::withTrashed()->get();
+        return $trash;
+        return view('soft-delete.index',['items'=>User::withTrashed()->get()]);
+    }
 }

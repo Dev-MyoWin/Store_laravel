@@ -20,10 +20,7 @@
 </div>
 @endif
 @endforeach
-
 </div>
+<a href="{{route('soft-delete')}}" class="btn btn-warning float-right text-light">View Trash</a>
 </div>
-
-
-
 @endsection
