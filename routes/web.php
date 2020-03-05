@@ -39,7 +39,9 @@ Route::resource('editors','EditorController');
 Route::get('editors/delete/{id}', 'EditorController@destroy')->name('editors.destroy');
 Route::get('products/delete/{id}', 'ProductController@delete')->name('product-delete');
 Route::get('editors-trash','EditorController@trash')->name('trash');
-
+Route::get('editors-promote','EditorController@promote')->name('promote');
+Route::get('editors/restore/{id}','EditorController@restore')->name('restore');
+Route::get('editors/forceDelete/{id}','EditorController@realDelete')->name('realDelete');
 Route::resource('histories','HistoryController');
 
 Route::get('delete-all','HistoryController@deleteAll')->name('delete-all');

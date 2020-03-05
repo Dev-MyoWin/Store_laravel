@@ -34,6 +34,18 @@ class EditorController extends Controller
        
         return view('editors.trash',['data' =>$data]);
     }
+    
+//promote editor
+
+
+    public function promote(Request $request){
+        $id=$request->id;
+       
+        User::where('role_id',2)->update(['role_id'=>1]);
+        
+        User::where('id',$id)->update(['role_id'=>2]);
+        return redirect()->route('editors.index');
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -93,6 +105,15 @@ class EditorController extends Controller
         
         $editor=User::find($id);
         $editor->delete();
+        return redirect()->route('editors.index');
+    }
+    public function restore($id){
+        
+        User::withTrashed()->find($id)->restore();
+        return redirect()->route('editors.index');
+    }
+    public function realDelete($id){
+        User::where('id', $id)->forceDelete();
         return redirect()->route('editors.index');
     }
 }

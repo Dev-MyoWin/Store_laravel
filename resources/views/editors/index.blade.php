@@ -15,7 +15,7 @@
       <h5 class="card-title">Name-{{$editor->name}} (<small>{{$editor->role->name}}</small>)</h5>
       <a href="{{route('editors.destroy',$editor->id)}}" class="btn btn-danger btn-md float-left">Delete</a>
      @if($editor->role->name == "editor")
-      <a href="" class="btn btn-success btn-md float-right">Promote</a>
+      <a href="{{route('promote',['id'=>$editor->id])}}" class="btn btn-success btn-md float-right">Promote</a>
     @endif
     </div>
   </div>

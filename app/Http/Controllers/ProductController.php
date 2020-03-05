@@ -136,6 +136,7 @@ class ProductController extends Controller
 
     public function plusAmount(Request $request){
         $id = $request->id;
+        
         $product = Product::find($id);
         Product::where('id',$id)->update(['amount'=>$product->amount+1]);
         History::create(['description'=> Auth::user()->name." added "." product amount of ".$product->name]);
