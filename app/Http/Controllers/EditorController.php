@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Decrypt;
 use App\History;
 use App\User;
 use App\Http\Requests\StoreEditor;
+use App\Http\Requests\Editor;
 class EditorController extends Controller
 {
     /**
@@ -79,7 +81,7 @@ class EditorController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('editors.edit',['edit'=>User::find($id)]);
     }
 
     /**
@@ -89,9 +91,11 @@ class EditorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Editor $request, $id)
     {
-        //
+        
+        User::where('id',$id)->update(['name'=>$request->name,'email'=>$request->email,'password'=>Hash::make($request->password)]);
+        return redirect()->route('editors.index');
     }
 
     /**
