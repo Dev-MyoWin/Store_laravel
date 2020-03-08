@@ -56,7 +56,7 @@
     </ul>
     <div class="form-inline my-2 my-lg-0">
 
-        <a class="nav-link text-warning mr-5" href="#"><i class="fa fa-bell"></i> &nbsp;Notifications</a>
+        <a class="nav-link text-warning mr-5" href="{{route('notifications.index')}}"><i class="fa fa-bell"></i> &nbsp;Notifications</a>
 
 </div>
   </div>

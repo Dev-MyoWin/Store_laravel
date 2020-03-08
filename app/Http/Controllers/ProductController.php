@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 use App\Product;
 use App\Category;
+use App\Notification;
 use App\History;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreProduct;
 
 class ProductController extends Controller
@@ -99,7 +101,7 @@ class ProductController extends Controller
         $file->move(public_path().'/image/author/',$file_name);
 
         Product::where('id',$id)->update(['image'=>$file_name,'name'=>$request->name,'amount'=>$request->amount]);
-        
+
         History::create(['description'=> Auth::user()->name." edited "." product ".$product->name]." as ".$request->name);
 
         return redirect()->route('products.index',['product'=>$id]);
@@ -136,9 +138,13 @@ class ProductController extends Controller
 
     public function plusAmount(Request $request){
         $id = $request->id;
+        
         $product = Product::find($id);
         Product::where('id',$id)->update(['amount'=>$product->amount+1]);
         History::create(['description'=> Auth::user()->name." added "." product amount of ".$product->name]);
+        if($product->amount < 11){
+          Notification::create(['title'=>'less than 10','description'=> Auth::user()->name.' noti increase amount '.$product->amount]);
+        }
         return redirect()->route('products.index');
     }
 
@@ -147,6 +153,9 @@ class ProductController extends Controller
         $product = Product::find($id);
         Product::where('id',$id)->update(['amount'=>$product->amount-1]);
         History::create(['description'=> Auth::user()->name." subedd "." product amount of ".$product->name]);
+        if($product->amount < 11){
+          Notification::create(['title'=>'less than 10','description'=>Auth::user()->name.' noti decrease amount '.$product->amount]);
+        }
         return redirect()->route('products.index');
     }
     public function delete($id)

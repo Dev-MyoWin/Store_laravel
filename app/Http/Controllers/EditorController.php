@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Decrypt;
 use App\History;
 use App\User;
 use App\Http\Requests\StoreEditor;
+use App\Http\Requests\Editor;
 class EditorController extends Controller
 {
     /**
@@ -33,6 +35,18 @@ class EditorController extends Controller
         $data=User::onlyTrashed()->get();
        
         return view('editors.trash',['data' =>$data]);
+    }
+    
+//promote editor
+
+
+    public function promote(Request $request){
+        $id=$request->id;
+       
+        User::where('role_id',2)->update(['role_id'=>1]);
+        
+        User::where('id',$id)->update(['role_id'=>2]);
+        return redirect()->route('editors.index');
     }
 
     /**
@@ -67,7 +81,7 @@ class EditorController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('editors.edit',['edit'=>User::find($id)]);
     }
 
     /**
@@ -77,9 +91,11 @@ class EditorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Editor $request, $id)
     {
-        //
+        
+        User::where('id',$id)->update(['name'=>$request->name,'email'=>$request->email,'password'=>Hash::make($request->password)]);
+        return redirect()->route('editors.index');
     }
 
     /**
@@ -95,11 +111,22 @@ class EditorController extends Controller
         $editor->delete();
         return redirect()->route('editors.index');
     }
+<<<<<<< HEAD
 
     public function softDelete()
     {
         $trash = User::withTrashed()->get();
         return $trash;
         return view('soft-delete.index',['items'=>User::withTrashed()->get()]);
+=======
+    public function restore($id){
+        
+        User::withTrashed()->find($id)->restore();
+        return redirect()->route('editors.index');
+    }
+    public function realDelete($id){
+        User::where('id', $id)->forceDelete();
+        return redirect()->route('editors.index');
+>>>>>>> 6705b97dc77c1dc4d96109e307e1a1df49751429
     }
 }

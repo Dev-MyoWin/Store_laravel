@@ -37,17 +37,29 @@ Route::get('plus-amount','ProductController@plusAmount')->name('plus-amount');
 
 Route::get('minus-amount','ProductController@minusAmount')->name('minus-amount');
 
+<<<<<<< HEAD
 Route::resource('editors','EditorController');
 
+=======
+>>>>>>> 6705b97dc77c1dc4d96109e307e1a1df49751429
 Route::get('editors/delete/{id}', 'EditorController@destroy')->name('editors.destroy');
 
 Route::get('products/delete/{id}', 'ProductController@delete')->name('product-delete');
 Route::get('editors-trash','EditorController@trash')->name('trash');
-
+Route::get('editors-promote','EditorController@promote')->name('promote');
+Route::get('editors/restore/{id}','EditorController@restore')->name('restore');
+Route::get('editors/forceDelete/{id}','EditorController@realDelete')->name('realDelete');
 Route::resource('histories','HistoryController');
-
 Route::get('delete-all','HistoryController@deleteAll')->name('delete-all');
+Route::get('delete-all-data','ProductController@deleteAllData')->name('delete-all-data');
 
+<<<<<<< HEAD
 Route::get('delete-all-data','ProductController@deleteAllData')->name('delete-all-data');
 
 Route::get('soft-delete','EditorController@softDelete')->name('soft-delete');
+=======
+Route::resource('notifications', 'NotificationController');
+Route::get('delete-all-noti','NotificationController@deleteAll')->name('delete-all-noti');
+Route::get('delete-all-data','NotificationController@deleteAllData')->name('delete-all-data');
+// Route::get('nav-noti', 'NotificationController@notification')->name('nav-noti');
+>>>>>>> 6705b97dc77c1dc4d96109e307e1a1df49751429

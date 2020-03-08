@@ -28,7 +28,7 @@
   @endforeach
 </table>
 </div>
-<a href="{{route('delete-all')}}" class="btn btn-dark text-warning float-right">Delete All &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash text-light"></i></a>
+<a href="{{route('delete-all')}}" class="btn btn-dark text-warning float-right mb-5">Delete All &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash text-light"></i></a>
 </div>
 
 @else
