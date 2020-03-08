@@ -75,11 +75,9 @@
   </div>
   </div>
           @empty
-          <div class="jumbotron col-sm-12 mt-5">
-            <h1 class="display-4">No data available !!</h1>
-            <p class="text-info">You can also bo a star author. Gettion Start Now.</p>
-            <hr class="my-4">
-            <a href="{{route('products.create')}}" class="btn btn-info float-right">Add Status</a>
+          <div class="jumbotron container bg-warning text-center my-5">
+          <h1 class="display-4">No Product Data Avaiable Now..!</h1>
+            <a class="btn btn-dark my-5 text-warning" style="font-weight:bold " href="{{route('products.create')}}" role="button">Add New Product &nbsp;&nbsp; <i class="fa fa-plus-circle text-warning"></i></a>
           </div>
         @endforelse
   </div>

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 use App\Product;
 use App\Category;
+use App\Notification;
+use App\History;
 use App\User;
-use Mail;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreProduct;
@@ -54,6 +56,8 @@ class ProductController extends Controller
 
       Product::create(['image'=>$file_name,'name'=>$request->name,'amount'=>$request->amount,'category_id'=>$request->category_id]);
 
+      History::create(['description'=> Auth::user()->name." added "." product ".$request->name]);
+
       return redirect()->route('products.index');
     }
 
@@ -88,13 +92,18 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $file = $request->file('image');
+        $file = $request->file('image');
+
+        $product = Product::where('id',$id)->first();
 
         $file_name = uniqid().'_'.$request->image->getClientOriginalName();
 
         $file->move(public_path().'/image/author/',$file_name);
 
         Product::where('id',$id)->update(['image'=>$file_name,'name'=>$request->name,'amount'=>$request->amount]);
+
+        History::create(['description'=> Auth::user()->name." edited "." product ".$product->name]." as ".$request->name);
+
         return redirect()->route('products.index',['product'=>$id]);
     }
 
@@ -114,12 +123,15 @@ class ProductController extends Controller
 
     public function lock(Request $request){
         $id = $request->id;
+        $product = Product::whereId($id)->first();
         $lock = Product::find($id);
         if($lock->lock_products == 'false'){
         Product::where('id',$id)->update(['lock_products'=>'true']);
+        History::create(['description'=> Auth::user()->name." locked "." product ".$product->name]);
         }
         else{
         Product::where('id',$id)->update(['lock_products'=>'false']);
+        History::create(['description'=> Auth::user()->name." unlocked "." product ".$product->name]);
         }
         return redirect()->route('products.index');
     }
@@ -128,6 +140,10 @@ class ProductController extends Controller
         $id = $request->id;
         $product = Product::find($id);
         Product::where('id',$id)->update(['amount'=>$product->amount+1]);
+        History::create(['description'=> Auth::user()->name." added "." product amount of ".$product->name]);
+        if($product->amount < 11){
+          Notification::create(['title'=>'less than 10','description'=> Auth::user()->name.' noti increase amount '.$product->amount]);
+        }
         return redirect()->route('products.index');
     }
 
@@ -135,19 +151,9 @@ class ProductController extends Controller
         $id = $request->id;
         $product = Product::find($id);
         Product::where('id',$id)->update(['amount'=>$product->amount-1]);
-        // return $product->amount;
-        if($product->amount < 10)
-        {
-          $latestPost = DB::table('products')->orderBy('created_at','desc')->first();
-          $users = User:: all();
-          foreach($users as $user){
-          $data = array('name'=>'Store Application','username'=>$user->name,'email'=>$user->email,'id'=>$latestPost->id);
-            Mail::send('mails.decrease', $data, function($message) use ($user) {
-              $message->to($user->email, $user->name)->subject
-              ('HTML Testing Mail');
-              $message->from('yoeholaravel@gmail.com','Store Application');
-            });
-          }
+        History::create(['description'=> Auth::user()->name." subedd "." product amount of ".$product->name]);
+        if($product->amount < 11){
+          Notification::create(['title'=>'less than 10','description'=>Auth::user()->name.' noti decrease amount '.$product->amount]);
         }
         return redirect()->route('products.index');
     }
@@ -155,6 +161,33 @@ class ProductController extends Controller
     {
       $product=Product::find($id);
       $product->delete();
+      History::create(['description'=> Auth::user()->name." deleted "." product ".$product->name]);
       return redirect()->route('products.index');
+    }
+
+    public function deleteAllData()
+    {
+        $categories = Category::all();
+        $products = Product::all();
+        $histories = History::all();
+        $editors = User::where('role_id',1)->get();
+
+        foreach($categories as $category)
+        {
+            $category->delete();
+        }
+        foreach($products as $product)
+        {
+            $product->delete();
+        }
+        foreach($histories as $history)
+        {
+            $history->delete();
+        }
+        foreach($editors as $editor)
+        {
+            $editor->delete();
+        }
+        return redirect()->route('products.index');
     }
 }

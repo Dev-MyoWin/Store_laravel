@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
+
 use App\History;
-use App\User;
-use App\Http\Requests\StoreEditor;
-class EditorController extends Controller
+
+class HistoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +15,7 @@ class EditorController extends Controller
      */
     public function index()
     {
-        return view('editors.index',['editors'=>User::all()]);
+        return view('histories.index',['histories'=>History::all()]);
     }
 
     /**
@@ -27,12 +25,7 @@ class EditorController extends Controller
      */
     public function create()
     {
-        return view('editors.create');
-    }
-    public function trash(){
-        $data=User::onlyTrashed()->get();
-       
-        return view('editors.trash',['data' =>$data]);
+        //
     }
 
     /**
@@ -41,11 +34,9 @@ class EditorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreEditor $request)
+    public function store(Request $request)
     {
-        User::create(['name'=>$request->name,'email'=>$request->email,'password'=>Hash::make($request->password)]);
-        History::create(['description'=> Auth::user()->name." was added "." editor ".$request->name]);
-        return redirect()->route('editors.index');
+        //
     }
 
     /**
@@ -90,9 +81,17 @@ class EditorController extends Controller
      */
     public function destroy($id)
     {
-        
-        $editor=User::find($id);
-        $editor->delete();
-        return redirect()->route('editors.index');
+        $history = History::find($id);
+        $history->delete();
+        return redirect()->route('histories.index');
+    }
+
+    public function deleteAll(){
+        $histories = History::all();
+              foreach($histories as $history)
+      {
+        $history->delete();
+      }
+        return redirect()->route('histories.index');
     }
 }
