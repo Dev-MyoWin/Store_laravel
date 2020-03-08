@@ -19,9 +19,25 @@
 </div>
 @empty
  <div class="jumbotron container bg-warning text-center my-5">
- <h1 class="display-4">No Category Data Avaiable Now..!</h1>
+ <h1 class="display-4">No Data Avaiable Now..!</h1>
  </div>
 @endforelse
+<script>
+import Swal from 'sweetalert2'
+
+// CommonJS
+const Swal = require('sweetalert2')
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+
+import 'sweetalert2/src/sweetalert2.scss'
+Swal.fire({
+  title: 'Error!',
+  text: 'Do you want to continue',
+  icon: 'error',
+  confirmButtonText: 'Cool'
+})
+
+</script>
 </div>
 </div>
 @endsection
