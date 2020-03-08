@@ -42,7 +42,10 @@ Route::get('editors-promote','EditorController@promote')->name('promote');
 Route::get('editors/restore/{id}','EditorController@restore')->name('restore');
 Route::get('editors/forceDelete/{id}','EditorController@realDelete')->name('realDelete');
 Route::resource('histories','HistoryController');
-
 Route::get('delete-all','HistoryController@deleteAll')->name('delete-all');
-
 Route::get('delete-all-data','ProductController@deleteAllData')->name('delete-all-data');
+
+Route::resource('notifications', 'NotificationController');
+Route::get('delete-all-noti','NotificationController@deleteAll')->name('delete-all-noti');
+Route::get('delete-all-data','NotificationController@deleteAllData')->name('delete-all-data');
+// Route::get('nav-noti', 'NotificationController@notification')->name('nav-noti');
