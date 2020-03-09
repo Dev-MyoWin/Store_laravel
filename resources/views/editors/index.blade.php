@@ -26,24 +26,15 @@
   </div>
 </div>
 </div>
-<<<<<<< HEAD
-@endif
-@endforeach
-=======
 @empty
 <div class="jumbotron container bg-warning text-center my-5">
  <h1 class="display-4">No Data Avaiable Now..!</h1>
  </div>
  @endforelse
->>>>>>> 764816591244287ac3c0c2270a12b909c227c8b2
-</div>
-<a href="{{route('soft-delete')}}" class="btn btn-warning float-right text-light">View Trash</a>
-</div>
-<<<<<<< HEAD
-=======
+ </div>
+ </div>
 
 <a href="{{route('trash')}}" class="btn btn-md btn-warning float-right mr-5">View Trash &nbsp; <i class="fa fa-trash"></i></a>
 
 
->>>>>>> 764816591244287ac3c0c2270a12b909c227c8b2
 @endsection

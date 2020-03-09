@@ -111,14 +111,6 @@ class EditorController extends Controller
         $editor->delete();
         return redirect()->route('editors.index');
     }
-<<<<<<< HEAD
-
-    public function softDelete()
-    {
-        $trash = User::withTrashed()->get();
-        return $trash;
-        return view('soft-delete.index',['items'=>User::withTrashed()->get()]);
-=======
     public function restore($id){
         
         User::withTrashed()->find($id)->restore();
@@ -127,6 +119,5 @@ class EditorController extends Controller
     public function realDelete($id){
         User::where('id', $id)->forceDelete();
         return redirect()->route('editors.index');
->>>>>>> 6705b97dc77c1dc4d96109e307e1a1df49751429
     }
 }

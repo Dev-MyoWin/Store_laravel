@@ -28,25 +28,28 @@
       <td class="pt-3">{{$notification->created_at}}</td>
       <td class="pt-3">{{$notification->updated_at}}</td>
       <td class="pt-3">
-        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#staticBackdrop">View</button>
-        <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5>Description</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                {{$notification->description}}
-              </div>
-              <div class="modal-footer">
-                <a href="" class="btn btn-success float-right">Read</a>
-              </div>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#notification" data-id="{{$notification->id}}" onclick="$('#dataid').val($(this).data('id')); $('#sendmail').modal('show');">
+         view
+        </button> 
+        <div class="modal fade" id="notification" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Notification</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>{{}}</p>
+                        <form action="{{route('flag')}}" method="POST">
+                        @csrf  
+                            <input type="hidden" name="id" id="dataid" value=""/>
+                            <div class="modal-footer">
+                              <button type="submit" class="btn btn-danger">Ok</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
+        </div> 
       </td>
     </tr>
   </tbody>
