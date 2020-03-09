@@ -31,8 +31,8 @@
  <h1 class="display-4">No Data Avaiable Now..!</h1>
  </div>
  @endforelse
-</div>
-</div>
+ </div>
+ </div>
 
 <a href="{{route('trash')}}" class="btn btn-md btn-warning float-right mr-5">View Trash &nbsp; <i class="fa fa-trash"></i></a>
 

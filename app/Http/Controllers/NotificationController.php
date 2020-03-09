@@ -93,8 +93,16 @@ class NotificationController extends Controller
       }
         return redirect()->route('notifications.index');
     }
-    // public function notification()
-    // {
-    //   return view('components.nav',['notifications'=>Notification::all()]);
-    // }
+    public function flag(Request $request)
+    {
+      $id = $request->id;
+      $noti = Notification::where('id',$id)->first();
+      if($noti->flag == 0){
+          Notification::where('id',$id)->update(['flag'=>1]);
+          return redirect()->route('notifications.index');
+      }
+      else{
+          return redirect()->route('notifications.index');
+      }
+    }
 }

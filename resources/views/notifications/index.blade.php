@@ -28,9 +28,28 @@
       <td class="pt-3">{{$notification->created_at}}</td>
       <td class="pt-3">{{$notification->updated_at}}</td>
       <td class="pt-3">
-        <!-- <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#staticBackdrop">View</button> -->
-    <a href="#" class="btn btn-warning btn-md float-left mt-3 mr-2" data-id="{{$notification->id}}" onclick="$('#dataid').val($(this).data('id'));$('#sendmail').modal('show');">Send &nbsp;&nbsp;&nbsp;<i class="fa fa-envelope"></i></a>
-
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#notification" data-id="{{$notification->id}}" onclick="$('#dataid').val($(this).data('id')); $('#sendmail').modal('show');">
+         view
+        </button> 
+        <div class="modal fade" id="notification" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Notification</h4>
+                    </div>
+                    <div class="modal-body">
+                        
+                        <form action="{{route('flag')}}" method="POST">
+                        @csrf  
+                            <input type="hidden" name="id" id="dataid" value=""/>
+                            <div class="modal-footer">
+                              <button type="submit" class="btn btn-danger">Ok</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div> 
       </td>
     </tr>
   </tbody>
