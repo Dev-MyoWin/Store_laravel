@@ -38,7 +38,7 @@
                         <h4 class="modal-title" id="myModalLabel">Notification</h4>
                     </div>
                     <div class="modal-body">
-                        
+                        <p></p>
                         <form action="{{route('flag')}}" method="POST">
                         @csrf  
                             <input type="text" name="id" id="dataid" value=""/>
