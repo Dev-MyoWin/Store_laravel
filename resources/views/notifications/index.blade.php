@@ -28,28 +28,36 @@
       <td class="pt-3">{{$notification->created_at}}</td>
       <td class="pt-3">{{$notification->updated_at}}</td>
       <td class="pt-3">
-        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#staticBackdrop">View</button>
-        <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5>Description</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                {{$notification->description}}
-              </div>
-              <div class="modal-footer">
-                <a href="" class="btn btn-success float-right">Read</a>
-              </div>
-            </div>
-          </div>
-        </div>
+        <!-- <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#staticBackdrop">View</button> -->
+    <a href="#" class="btn btn-warning btn-md float-left mt-3 mr-2" data-id="{{$notification->id}}" onclick="$('#dataid').val($(this).data('id'));$('#sendmail').modal('show');">Send &nbsp;&nbsp;&nbsp;<i class="fa fa-envelope"></i></a>
+
       </td>
     </tr>
   </tbody>
+  <!-- Modal -->
+<div class="modal fade" id="sendmail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+     <form action="#" method="POST">
+     @csrf
+     <div class="modal-body">
+        <input type="hidden" name="id" id="dataid">
+      <textarea id="" cols="30" rows="9" name="content" class="form-control"></textarea>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+        </div>
+     </form>
+    </div>
+  </div>
+</div>
 
   @endforeach
 </table>
