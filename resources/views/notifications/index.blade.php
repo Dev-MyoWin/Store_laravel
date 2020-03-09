@@ -41,7 +41,7 @@
                         
                         <form action="{{route('flag')}}" method="POST">
                         @csrf  
-                            <input type="hidden" name="id" id="dataid" value=""/>
+                            <input type="text" name="id" id="dataid" value=""/>
                             <div class="modal-footer">
                               <button type="submit" class="btn btn-danger">Ok</a>
                             </div>

@@ -97,6 +97,7 @@ class NotificationController extends Controller
     {
       $id = $request->id;
       $noti = Notification::where('id',$id)->first();
+      return ($noti);
       if($noti->flag == 0){
           Notification::where('id',$id)->update(['flag'=>1]);
           return redirect()->route('notifications.index');
