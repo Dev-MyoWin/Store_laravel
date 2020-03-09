@@ -5,7 +5,7 @@
 @if(count($notifications)!=0)
 <div class="container">
   <div class="row">
-  <h1 class=" my-5 "><i class="fa fa-bell"  onClick="mensaje2()"></i>&nbsp;&nbsp;&nbsp;Notification</h1>
+  <h1 class=" my-5 "><i class="fa fa-bell"></i>&nbsp;&nbsp;&nbsp;Notification</h1>
 
   <table class="table shadow">
   <thead>
@@ -15,6 +15,7 @@
       <th>Created_at</th>
       <th>Updated_at</th>
       <th>Description</th>
+      <th></th>
     </tr>
   </thead>
   @php
@@ -28,8 +29,10 @@
       <td class="pt-3">{{$notification->created_at}}</td>
       <td class="pt-3">{{$notification->updated_at}}</td>
       <td class="pt-3">
-        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#staticBackdrop">View</button>
-        <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#notification" data-id="{{$notification->id}}" onclick="$('#dataid').val($(this).data('id')); $('#sendmail').modal('show');">
+          View
+        </button>
+        <div class="modal fade" id="notification" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
@@ -38,15 +41,25 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">
-                {{$notification->description}}
-              </div>
-              <div class="modal-footer">
-                <a href="" class="btn btn-success float-right">Read</a>
-              </div>
+              <form class="" action="{{route('flag')}}" method="post">
+                @csrf
+                <div class="modal-body">
+                  <input type="text" name="id" id="dataid" value="">
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-danger" name="button">Read</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
+      </td>
+      <td>
+        @if($notification->flag == 0)
+        <i class="fa fa-envelope" style="font-size: 30px;"></i>
+        @else
+        <i class="fa fa-envelop" style="font-size: 30px;"></i>
+        @endif
       </td>
     </tr>
   </tbody>
