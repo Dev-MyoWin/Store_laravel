@@ -28,9 +28,7 @@
       <td class="pt-3">{{$notification->created_at}}</td>
       <td class="pt-3">{{$notification->updated_at}}</td>
       <td class="pt-3">
-        <input type="hidden" value="{{$notification->description}}">
-        <input type="hidden" value="{{$notification->id}}">
-        <button type="button" class="btn btn-outline-dark view" data-toggle="modal" data-target="#staticBackdrop">View</button>
+        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#staticBackdrop">View</button>
         <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -41,7 +39,7 @@
                 </button>
               </div>
               <div class="modal-body">
-                {{$_COOKIE->notivar}}
+                {{$notification->description}}
               </div>
               <div class="modal-footer">
                 <a href="" class="btn btn-success float-right">Read</a>
@@ -55,16 +53,6 @@
 
   @endforeach
 </table>
-<script type="text/javascript">
-$('.view').click (function()
-{
-
-  var id = $(this).prev().val();
-  var description = $(this).prev().prev().val();
-  document.cookie = "notivar="+ id;
-
-  $('.modal-body').html(description);
-});
 </script>
 </div>
 <a href="{{route('delete-all-noti')}}" class="btn btn-dark text-warning float-right mb-5">Delete All &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash text-light"></i></a>

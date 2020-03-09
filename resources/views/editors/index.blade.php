@@ -18,7 +18,7 @@
     
       <h5 class="card-title">Name-{{$editor->name}} (<small>{{$editor->role->name}}</small>)</h5>
      @if($editor->role->name == "editor")
-     <a href="{{route('editors.destroy',$editor->id)}}" class="btn btn-danger btn-md float-left">Delete</a>
+     <a href="{{route('editors.destroy',$editor->id)}}" class="btn btn-danger btn-md float-left">Delete &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash text-light"></i></a>
 
       <a href="{{route('promote',['id'=>$editor->id])}}" class="btn btn-success btn-md float-right">Promote</a>
     @endif
@@ -31,8 +31,8 @@
  <h1 class="display-4">No Data Avaiable Now..!</h1>
  </div>
  @endforelse
-</div>
-</div>
+ </div>
+ </div>
 
 <a href="{{route('trash')}}" class="btn btn-md btn-warning float-right mr-5">View Trash &nbsp; <i class="fa fa-trash"></i></a>
 

@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  <script src="sweetalert2.all.min.js"></script>
+<!-- Optional: include a polyfill for ES6 Promises for IE11 -->
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+
   <link href="https://img.icons8.com/color/48/000000/online-store.png" rel="icon">
    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
