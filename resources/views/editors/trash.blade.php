@@ -1,4 +1,3 @@
-
 @extends('layouts.master')
 @section('title','New Editor')
 @section('content')
@@ -19,7 +18,7 @@
 </div>
 @empty
  <div class="jumbotron container bg-warning text-center my-5">
- <h1 class="display-4">No Category Data Avaiable Now..!</h1>
+ <h1 class="display-4">No Data Avaiable Now..!</h1>
  </div>
 @endforelse
 </div>

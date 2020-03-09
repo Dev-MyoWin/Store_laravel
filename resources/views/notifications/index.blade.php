@@ -5,7 +5,7 @@
 @if(count($notifications)!=0)
 <div class="container">
   <div class="row">
-  <h1 class=" my-5 "><i class="fa fa-th-large"  onClick="mensaje2()"></i>&nbsp;&nbsp;&nbsp;Notification</h1>
+  <h1 class=" my-5 "><i class="fa fa-bell"  onClick="mensaje2()"></i>&nbsp;&nbsp;&nbsp;Notification</h1>
 
   <table class="table shadow">
   <thead>
@@ -28,7 +28,9 @@
       <td class="pt-3">{{$notification->created_at}}</td>
       <td class="pt-3">{{$notification->updated_at}}</td>
       <td class="pt-3">
-        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#staticBackdrop">View</button>
+        <input type="hidden" value="{{$notification->description}}">
+        <input type="hidden" value="{{$notification->id}}">
+        <button type="button" class="btn btn-outline-dark view" data-toggle="modal" data-target="#staticBackdrop">View</button>
         <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -39,7 +41,7 @@
                 </button>
               </div>
               <div class="modal-body">
-                {{$notification->description}}
+                {{$_COOKIE->notivar}}
               </div>
               <div class="modal-footer">
                 <a href="" class="btn btn-success float-right">Read</a>
@@ -53,6 +55,17 @@
 
   @endforeach
 </table>
+<script type="text/javascript">
+$('.view').click (function()
+{
+
+  var id = $(this).prev().val();
+  var description = $(this).prev().prev().val();
+  document.cookie = "notivar="+ id;
+
+  $('.modal-body').html(description);
+});
+</script>
 </div>
 <a href="{{route('delete-all-noti')}}" class="btn btn-dark text-warning float-right mb-5">Delete All &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash text-light"></i></a>
 </div>
@@ -63,24 +76,4 @@
  </div>
 @endif
 
-<script>
-  function mensaje2() {
-    swal({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then(function() {
-      swal(
-        'Deleted!',
-        'Your file has been deleted.',
-        'success'
-      )
-    })
-  }
-
-</script>
 @endsection
