@@ -15,7 +15,6 @@
       <th>Created_at</th>
       <th>Updated_at</th>
       <th>Description</th>
-      <th></th>
     </tr>
   </thead>
   @php
@@ -29,9 +28,14 @@
       <td class="pt-3">{{$notification->created_at}}</td>
       <td class="pt-3">{{$notification->updated_at}}</td>
       <td class="pt-3">
-        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#notification" data-id="{{$notification->id}}" onclick="$('#dataid').val($(this).data('id')); $('#sendmail').modal('show');">
+        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#notification" data-id="{{$notification->description}}" onclick="$('#dataid').val($(this).data('id')); $('#sendmail').modal('show');">
           View
-        </button>
+        </button>&nbsp;&nbsp;
+        @if($notification->flag == 0)
+        <img class="image-icon" src="image/author/yellow-new.svg" alt="star icon">
+        @else
+        <i class="fa fa-envelop" style="font-size: 30px;"></i>
+        @endif
         <div class="modal fade" id="notification" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -44,7 +48,7 @@
               <form class="" action="{{route('flag')}}" method="post">
                 @csrf
                 <div class="modal-body">
-                  <input type="text" name="id" id="dataid" value="">
+                  <input type="text" name="description" id="dataid" class="form-control" readonly>
                 </div>
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-danger" name="button">Read</button>
@@ -53,13 +57,6 @@
             </div>
           </div>
         </div>
-      </td>
-      <td>
-        @if($notification->flag == 0)
-        <i class="fa fa-envelope" style="font-size: 30px;"></i>
-        @else
-        <i class="fa fa-envelop" style="font-size: 30px;"></i>
-        @endif
       </td>
     </tr>
   </tbody>

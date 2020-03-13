@@ -14,7 +14,10 @@ class NotificationController extends Controller
      */
     public function index()
     {
-      return view('notifications.index',['notifications'=>Notification::all()->take(10)]);
+      $noti = Notification::orderBy('id', 'desc')
+               ->take(10)
+               ->get();
+      return view('notifications.index',['notifications'=>$noti]);
     }
 
     /**
@@ -95,10 +98,10 @@ class NotificationController extends Controller
     }
     public function flag(Request $request)
     {
-      $id = $request->id;
-      $noti = Notification::where('id',$id)->first();
+      $desc = $request->description;
+      $noti = Notification::where('description',$desc)->first();
       if($noti->flag == 0){
-          Notification::where('id',$id)->update(['flag'=>1]);
+          Notification::where('description',$desc)->update(['flag'=>1]);
           return redirect()->route('notifications.index');
       }
       else{
