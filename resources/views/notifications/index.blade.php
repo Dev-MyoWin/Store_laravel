@@ -28,7 +28,8 @@
       <td class="pt-3">{{$notification->created_at}}</td>
       <td class="pt-3">{{$notification->updated_at}}</td>
       <td class="pt-3">
-        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#notification" data-id="{{$notification->description}}" onclick="$('#dataid').val($(this).data('id')); $('#sendmail').modal('show');">
+        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-id="{{ $notification->id }}" data-description="{{ $notification->description }}" data-target="#notification"
+          onclick="$('#dataid').val($(this).data('id'));$('#datadescription').val($(this).data('description'));$('#sendmail').modal('show');">
           View
         </button>&nbsp;&nbsp;
         @if($notification->flag == 0)
@@ -48,10 +49,11 @@
               <form class="" action="{{route('flag')}}" method="post">
                 @csrf
                 <div class="modal-body">
-                  <input type="text" name="description" id="dataid" class="form-control" readonly>
+                  <input type="hidden" name="id" id="dataid" class="form-control">
+                  <input type="text" name="description" id="datadescription" class="form-control" readonly>
                 </div>
                 <div class="modal-footer">
-                  <button type="submit" class="btn btn-danger" name="button">Read</button>
+                  <button type="submit" class="btn btn-dark" name="button">Ok</button>
                 </div>
               </form>
             </div>
