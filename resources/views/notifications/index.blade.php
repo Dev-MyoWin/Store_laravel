@@ -28,7 +28,7 @@
       <td class="pt-3">{{$notification->created_at}}</td>
       <td class="pt-3">{{$notification->updated_at}}</td>
       <td class="pt-3">
-        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-id="{{ $notification->id }}" data-description="{{ $notification->description }}" data-target="#notification"
+        <button type="button" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-id="{{ $notification->id }}" data-description="{{ $notification->description }}" data-target="#notification"
           onclick="$('#dataid').val($(this).data('id'));$('#datadescription').val($(this).data('description'));$('#sendmail').modal('show');">
           View
         </button>&nbsp;&nbsp;
