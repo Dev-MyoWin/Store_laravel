@@ -5,7 +5,7 @@
 @if(count($notifications)!=0)
 <div class="container">
   <div class="row">
-  <h1 class=" my-5 "><i class="fa fa-th-large"  onClick="mensaje2()"></i>&nbsp;&nbsp;&nbsp;Notification</h1>
+  <h1 class=" my-5 "><i class="fa fa-bell"></i>&nbsp;&nbsp;&nbsp;Notification</h1>
 
   <table class="table shadow">
   <thead>
@@ -28,14 +28,42 @@
       <td class="pt-3">{{$notification->created_at}}</td>
       <td class="pt-3">{{$notification->updated_at}}</td>
       <td class="pt-3">
-        <a href="{{route('flag',['id'=>$notification->id])}}" class="btn btn-dark"> view</a>
-         
+        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#notification" data-id="{{$notification->description}}" onclick="$('#dataid').val($(this).data('id')); $('#sendmail').modal('show');">
+          View
+        </button>&nbsp;&nbsp;
+        @if($notification->flag == 0)
+        <img class="image-icon" src="image/author/yellow-new.svg" alt="star icon">
+        @else
+        <i class="fa fa-envelop" style="font-size: 30px;"></i>
+        @endif
+        <div class="modal fade" id="notification" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5>Description</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form class="" action="{{route('flag')}}" method="post">
+                @csrf
+                <div class="modal-body">
+                  <input type="text" name="description" id="dataid" class="form-control" readonly>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-dark text-warning" name="button">Read</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </td>
     </tr>
   </tbody>
- 
+
   @endforeach
 </table>
+</script>
 </div>
 <a href="{{route('delete-all-noti')}}" class="btn btn-dark text-warning float-right mb-5">Delete All &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash text-light"></i></a>
 </div>

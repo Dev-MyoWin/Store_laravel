@@ -15,8 +15,9 @@ class HistoryController extends Controller
      */
     public function index()
     {
-        $history=History::orderBy('id','desc')
-                ->take(10)->get();
+      $history = History::orderBy('id', 'desc')
+               ->take(10)
+               ->get();
         return view('histories.index',['histories'=>$history]);
     }
 

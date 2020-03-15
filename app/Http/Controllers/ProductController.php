@@ -138,23 +138,26 @@ class ProductController extends Controller
 
     public function plusAmount(Request $request){
         $id = $request->id;
-        
+
         $product = Product::find($id);
-        Product::where('id',$id)->update(['amount'=>$product->amount+1]);
+        $old_product = $product->amount;
+        $product->update(['amount'=>$product->amount+1]);
         History::create(['description'=> Auth::user()->name." added "." product amount of ".$product->name]);
         if($product->amount < 11){
-          Notification::create(['title'=>'less than 10','description'=> Auth::user()->name.' noti increase amount '.$product->amount]);
+          Notification::create(['title'=>'less than 10','description'=> Auth::user()->name.' increased amount of '.$product->name.' from '.$old_product.' to '.$product->amount]);
         }
         return redirect()->route('products.index');
     }
 
     public function minusAmount(Request $request){
         $id = $request->id;
+
         $product = Product::find($id);
-        Product::where('id',$id)->update(['amount'=>$product->amount-1]);
+        $old_product = $product->amount;
+        $product->update(['amount'=>$product->amount-1]);
         History::create(['description'=> Auth::user()->name." subedd "." product amount of ".$product->name]);
-        if($product->amount < 11){
-          Notification::create(['title'=>'less than 10','description'=>Auth::user()->name.' noti decrease amount '.$product->amount]);
+        if($product->amount < 10){
+          Notification::create(['title'=>'less than 10','description'=>Auth::user()->name.' decreased amount of '.$product->name.' from '.$old_product.' to '.$product->amount]);
         }
         return redirect()->route('products.index');
     }
