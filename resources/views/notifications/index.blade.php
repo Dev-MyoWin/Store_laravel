@@ -15,6 +15,9 @@
       <th>Created_at</th>
       <th>Updated_at</th>
       <th>Description</th>
+      <th>
+        <a href="{{route('flag-all')}}" class="btn btn-outline-dark">View all</a>
+      </th>
     </tr>
   </thead>
   @php
@@ -60,6 +63,7 @@
           </div>
         </div>
       </td>
+      <td></td>
     </tr>
   </tbody>
 

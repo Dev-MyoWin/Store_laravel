@@ -50,5 +50,5 @@ Route::get('delete-all-data','ProductController@deleteAllData')->name('delete-al
 
 Route::resource('notifications', 'NotificationController');
 Route::get('delete-all-noti','NotificationController@deleteAll')->name('delete-all-noti');
-Route::get('delete-all-data','NotificationController@deleteAllData')->name('delete-all-data');
 Route::post('flag','NotificationController@flag')->name('flag');
+Route::get('flag-all', 'NotificationController@flagAll')->name('flag-all');

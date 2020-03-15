@@ -83,9 +83,7 @@ class NotificationController extends Controller
      */
     public function destroy($id)
     {
-        $notification = Notification::find($id);
-        $notification->delete();
-        return redirect()->route('notifications.index');
+
     }
 
     public function deleteAll(){
@@ -108,5 +106,14 @@ class NotificationController extends Controller
       else{
           return redirect()->route('notifications.index');
       }
+    }
+    public function flagAll()
+    {
+      $notifications = Notification::all();
+            foreach($notifications as $notification)
+    {
+      $notification->update(['flag'=>1]);
+    }
+      return redirect()->route('notifications.index');
     }
 }
