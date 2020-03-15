@@ -98,10 +98,11 @@ class NotificationController extends Controller
     }
     public function flag(Request $request)
     {
-      $desc = $request->description;
-      $noti = Notification::where('description',$desc)->first();
+      // $desc = $request->description;
+      $id = $request->id;
+      $noti = Notification::where('id',$id)->first();
       if($noti->flag == 0){
-          Notification::where('description',$desc)->update(['flag'=>1]);
+          Notification::where('id',$id)->update(['flag'=>1]);
           return redirect()->route('notifications.index');
       }
       else{
