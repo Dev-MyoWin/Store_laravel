@@ -6,6 +6,9 @@
 <div class="container">
   <div class="row">
   <h1 class=" my-5 "><i class="fa fa-bell"></i>&nbsp;&nbsp;&nbsp;Notification</h1>
+  <div class="col-md-12">
+    <a href="{{route('flag-all')}}" class="btn btn-dark text-warning float-right mb-3">Read all &nbsp;&nbsp;<i class="fa fa-check text-light"></i></a>
+  </div>
 
   <table class="table shadow">
   <thead>
@@ -15,9 +18,6 @@
       <th>Created_at</th>
       <th>Updated_at</th>
       <th>Description</th>
-      <th>
-        <a href="{{route('flag-all')}}" class="btn btn-outline-dark">View all</a>
-      </th>
     </tr>
   </thead>
   @php
@@ -31,7 +31,7 @@
       <td class="pt-3">{{$notification->created_at}}</td>
       <td class="pt-3">{{$notification->updated_at}}</td>
       <td class="pt-3">
-        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-id="{{ $notification->id }}" data-description="{{ $notification->description }}" data-target="#notification"
+        <button type="button" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-id="{{ $notification->id }}" data-description="{{ $notification->description }}" data-target="#notification"
           onclick="$('#dataid').val($(this).data('id'));$('#datadescription').val($(this).data('description'));$('#sendmail').modal('show');">
           View
         </button>&nbsp;&nbsp;
@@ -56,20 +56,18 @@
                   <input type="text" name="description" id="datadescription" class="form-control" readonly>
                 </div>
                 <div class="modal-footer">
-                  <button type="submit" class="btn btn-dark" name="button">Ok</button>
+                  <button type="submit" class="btn btn-dark" name="button">Read</button>
                 </div>
               </form>
             </div>
           </div>
         </div>
       </td>
-      <td></td>
     </tr>
   </tbody>
 
   @endforeach
 </table>
-</script>
 </div>
 <a href="{{route('delete-all-noti')}}" class="btn btn-dark text-warning float-right mb-5">Delete All &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash text-light"></i></a>
 </div>
@@ -79,5 +77,4 @@
  <h1 class="display-4">No Log Data Avaiable Now..!</h1>
  </div>
 @endif
-
 @endsection

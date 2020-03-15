@@ -16,18 +16,20 @@ Route::get('/', function () {
 });
 
 
-Route::resource('products','ProductController');
-
-Route::resource('categories','CategoryController');
-
-Route::resource('editors','EditorController');
-
-Route::resource('products','ProductController');
-
-Route::resource('categories','CategoryController');
-
-Route::resource('editors','EditorController');
 Auth::routes();
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('products','ProductController');
+
+Route::resource('categories','CategoryController');
+
+Route::resource('editors','EditorController');
+
+Route::resource('products','ProductController');
+
+Route::resource('categories','CategoryController');
+
+Route::resource('editors','EditorController');
+
 
 Route::post('lock','ProductController@lock')->name('lock');
 
@@ -51,4 +53,8 @@ Route::get('delete-all-data','ProductController@deleteAllData')->name('delete-al
 Route::resource('notifications', 'NotificationController');
 Route::get('delete-all-noti','NotificationController@deleteAll')->name('delete-all-noti');
 Route::post('flag','NotificationController@flag')->name('flag');
+
 Route::get('flag-all', 'NotificationController@flagAll')->name('flag-all');
+
+
+});

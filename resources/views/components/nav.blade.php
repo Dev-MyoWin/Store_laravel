@@ -58,7 +58,7 @@
         <a href="{{route('notifications.index')}}" class="nav-link text-warning mr-5"
           role="button" aria-expanded="false">Notifications
           <i class="fa fa-bell" aria-hidden="true"></i>
-          <span class="badge" style="background:#fff; position:relative; top: -10px; left:-10px">
+          <span class="badge" style="position:relative; top: -10px; left:-10px">
             @include('notifications.unread')
           </span>
         </a>
