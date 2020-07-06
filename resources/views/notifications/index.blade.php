@@ -36,7 +36,7 @@
           View
         </button>&nbsp;&nbsp;
         @if($notification->flag == 0)
-        <img class="image-icon" src="image/author/yellow-new.svg" alt="star icon">
+        <img class="image-icon" src="image/author/star icon.png" alt="star icon">
         @else
         <i class="fa fa-envelop" style="font-size: 30px;"></i>
         @endif

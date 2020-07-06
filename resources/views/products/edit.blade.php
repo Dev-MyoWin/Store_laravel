@@ -26,7 +26,7 @@
     <div class="form-group row">
     <label for="inputTitle" class="col-form-label">Upload Image</label>
     <div class="col-sm-12">
-      <input type="file" class="custom-file-input" name="image" id="inputGroupFile01" value="{{$edit->image}}">
+      <input type="file" class="custom-file-input" name="image" id="inputGroupFile01">
       <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
     </div>
   </div>
