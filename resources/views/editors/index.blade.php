@@ -18,9 +18,9 @@
     
       <h5 class="card-title">Name-{{$editor->name}} (<small>{{$editor->role->name}}</small>)</h5>
      @if($editor->role->name == "editor")
-     <a href="{{route('editors.destroy',$editor->id)}}" class="btn btn-dark btn-md text-warning float-left">Delete &nbsp;&nbsp;&nbsp;<i class="fa fa-trash text-light"></i></a>
+     <a href="{{route('editors.destroy',$editor->id)}}" class="btn btn-dark btn-sm text-warning float-left">Delete &nbsp;&nbsp;&nbsp;<i class="fa fa-trash text-light"></i></a>
 
-      <a href="{{route('promote',['id'=>$editor->id])}}" class="btn btn-dark text-warning btn-md float-right">Promote &nbsp;&nbsp;&nbsp;<i class="fa fa-angle-double-up text-light"></i></a>
+      <a href="{{route('promote',['id'=>$editor->id])}}" class="btn btn-dark text-warning btn-sm float-right">Promote &nbsp;&nbsp;&nbsp;<i class="fa fa-angle-double-up text-light"></i></a>
     @endif
     </div>
   </div>
