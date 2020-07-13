@@ -94,15 +94,15 @@ class ProductController extends Controller
     {
         $file = $request->file('image');
 
-        $product = Product::where('id',$id)->first();
-
-        $file_name = uniqid().'_'.$request->image->getClientOriginalName();
+        $file_name = uniqid().'_'.$request->image->getClientOriginalExtension();
 
         $file->move(public_path().'/image/author/',$file_name);
 
+        $product = Product::where('id',$id)->first();
+
         Product::where('id',$id)->update(['image'=>$file_name,'name'=>$request->name,'amount'=>$request->amount]);
 
-        History::create(['description'=> Auth::user()->name." edited "." product ".$product->name]." as ".$request->name);
+        History::create(['description'=> Auth::user()->name," edited "," product ",$product->name]," as ",$request->name);
 
         return redirect()->route('products.index',['product'=>$id]);
     }
@@ -141,12 +141,19 @@ class ProductController extends Controller
 
         $product = Product::find($id);
         $old_product = $product->amount;
-        $product->update(['amount'=>$product->amount+1]);
-        History::create(['description'=> Auth::user()->name." added "." product amount of ".$product->name]);
-        if($product->amount < 11){
-          Notification::create(['title'=>'less than 10','description'=> Auth::user()->name.' increased amount of '.$product->name.' from '.$old_product.' to '.$product->amount]);
+        if($product->amount >= 100000){
+
+            return redirect()->route('products.index');            
+        }else{
+
+            $product->update(['amount'=>$product->amount+1]);
+            History::create(['description'=> Auth::user()->name." added "." product amount of ".$product->name]);
+            if($product->amount < 11){
+            Notification::create(['title'=>'less than 10','description'=> Auth::user()->name.' increased amount of '.$product->name.' from '.$old_product.' to '.$product->amount]);
+            }
+            return redirect()->route('products.index');
         }
-        return redirect()->route('products.index');
+        
     }
 
     public function minusAmount(Request $request){
@@ -154,12 +161,20 @@ class ProductController extends Controller
 
         $product = Product::find($id);
         $old_product = $product->amount;
-        $product->update(['amount'=>$product->amount-1]);
-        History::create(['description'=> Auth::user()->name." subedd "." product amount of ".$product->name]);
-        if($product->amount < 10){
-          Notification::create(['title'=>'less than 10','description'=>Auth::user()->name.' decreased amount of '.$product->name.' from '.$old_product.' to '.$product->amount]);
+        if($product->amount <= 0)
+        {
+            return redirect()->route('products.index');
+        }else
+        {
+
+            $product->update(['amount'=>$product->amount-1]);
+            History::create(['description'=> Auth::user()->name." subedd "." product amount of ".$product->name]);
+            if($product->amount < 10){
+                Notification::create(['title'=>'less than 10','description'=>Auth::user()->name.' decreased amount of '.$product->name.' from '.$old_product.' to '.$product->amount]);
+            }
+            return redirect()->route('products.index');
+
         }
-        return redirect()->route('products.index');
     }
     public function delete($id)
     {
