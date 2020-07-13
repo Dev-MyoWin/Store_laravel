@@ -94,19 +94,25 @@
 @csrf
    <h3>Editor Registration</h3>
 
-   <div><i class="fa fa-exclamation-circle fn H"></i><input type="text" name="name" id="name" placeholder="NAME"><i class="fa fa-check pn H"></i></div>
+   <div><i class="fa fa-exclamation-circle fn H"></i><input type="text" name="name" id="name" placeholder="NAME" class="@error('name') is-invalid @enderror" ><i class="fa fa-check pn H"></i>
    
-   @if($errors->any())
-      @foreach ($errors->get('name') as $error)
-      <p class="text-danger">{{$error}}</p>
-      @endforeach
-  @endif
-   <div><i class="fa fa-exclamation-circle fe H"></i><input type="email" name="email" placeholder="EMAIL" id="email"><i class="fa fa-check pe H"></i></div>
-   @if($errors->any())
-      @foreach ($errors->get('email') as $error)
-      <p class="text-danger">{{$error}}</p>
-      @endforeach
-  @endif
+   @error('name')
+    <span class="invalid-feedback" role="alert">
+         <strong>{{ $message }}</strong>
+    </span>
+    @enderror
+   </div>
+   
+
+   <div><i class="fa fa-exclamation-circle fe H"></i><input type="email" name="email" placeholder="EMAIL" id="email"><i class="fa fa-check pe H" class="@error('email') is-invalid @enderror"></i>
+  
+   @error('email')
+    <span class="invalid-feedback" role="alert">
+         <strong>{{ $message }}</strong>
+    </span>
+    @enderror
+   </div>
+  
    <div><i class="fa fa-exclamation-circle fp H"></i><input type="password" name="password" id="pass" placeholder="PASSWORD"><i class="fa fa-check pp H"></i></div>   
    @if($errors->any())
       @foreach ($errors->get('password') as $error)

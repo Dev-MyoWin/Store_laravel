@@ -6,6 +6,9 @@
 <div class="container">
   <div class="row">
   <h1 class=" my-5 "><i class="fa fa-bell"></i>&nbsp;&nbsp;&nbsp;Notification</h1>
+  <div class="col-md-12">
+    <a href="{{route('flag-all')}}" class="btn btn-dark text-warning float-right mb-3">Read all &nbsp;&nbsp;<i class="fa fa-check text-light"></i></a>
+  </div>
 
   <table class="table shadow">
   <thead>
@@ -53,7 +56,7 @@
                   <input type="text" name="description" id="datadescription" class="form-control" readonly>
                 </div>
                 <div class="modal-footer">
-                  <button type="submit" class="btn btn-dark" name="button">Ok</button>
+                  <button type="submit" class="btn btn-dark" name="button">Read</button>
                 </div>
               </form>
             </div>
@@ -65,7 +68,6 @@
 
   @endforeach
 </table>
-</script>
 </div>
 <a href="{{route('delete-all-noti')}}" class="btn btn-dark text-warning float-right mb-5">Delete All &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash text-light"></i></a>
 </div>

@@ -38,7 +38,7 @@
 			</li>
             @if (Route::has('register'))
             <li class="all25 btn">
-				<a href="{{ route('register') }}">Register Now</a>
+				<a href="{{ route('register') }}">Register Now <i class="fa fa-user"></i></a>
             </li>
             @endif
             @endauth
