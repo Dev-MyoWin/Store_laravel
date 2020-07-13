@@ -29,7 +29,7 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    { 
         return view('products.create',['categories'=>Category::all()]);
     }
 
@@ -57,6 +57,9 @@ class ProductController extends Controller
       Product::create(['image'=>$file_name,'name'=>$request->name,'amount'=>$request->amount,'category_id'=>$request->category_id]);
 
       History::create(['description'=> Auth::user()->name." added "." product ".$request->name]);
+      if($request->amount < 10){
+        Notification::create(['title'=>'less than 10','description'=>Auth::user()->name.' created product amount is less than 10.']);
+    }
 
       return redirect()->route('products.index');
     }
@@ -94,13 +97,18 @@ class ProductController extends Controller
     {
         $file = $request->file('image');
 
-        $file_name = uniqid().'_'.$request->image->getClientOriginalExtension();
-
-        $file->move(public_path().'/image/author/',$file_name);
-
         $product = Product::where('id',$id)->first();
+        if($file == NULL)
+        {
+            Product::where('id',$id)->update(['name'=>$request->name,'amount'=>$request->amount]);
+        }
+        else {
+            $file_name = uniqid().'_'.$request->image->getClientOriginalName();
 
-        Product::where('id',$id)->update(['image'=>$file_name,'name'=>$request->name,'amount'=>$request->amount]);
+            $file->move(public_path().'/image/author/',$file_name);
+
+            Product::where('id',$id)->update(['image'=>$file_name,'name'=>$request->name,'amount'=>$request->amount]);
+        }
 
         History::create(['description'=> Auth::user()->name," edited "," product ",$product->name]," as ",$request->name);
 

@@ -45,9 +45,6 @@
             <div class="modal-content">
               <div class="modal-header">
                 <h5>Description</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
               </div>
               <form class="" action="{{route('flag')}}" method="post">
                 @csrf
@@ -56,7 +53,7 @@
                   <input type="text" name="description" id="datadescription" class="form-control" readonly>
                 </div>
                 <div class="modal-footer">
-                  <button type="submit" class="btn btn-dark" name="button">Read</button>
+                  <button type="submit" class="btn btn-dark btn-sm" name="button">Close</button>
                 </div>
               </form>
             </div>
